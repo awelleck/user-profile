@@ -14,3 +14,5 @@ Setting up virtualenv to use Python 3
 * `virtualenv ENV`
 * `source ENV/bin/activate`
 * `virtualenv -p python3 env`
+* `pip install -r requirements.txt`
+* `python app.py`
