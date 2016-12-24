@@ -1,5 +1,6 @@
 import psycopg2
 from flask import Flask, render_template
+from flask_api import status
 
 app = Flask(__name__)
 conn_string = "host='localhost' dbname='practice' user='' password=''"
@@ -22,7 +23,7 @@ def to_db():
         	VALUES (%s, %s);""",
     	('one', 'two'))
 	conn.commit()
-	return
+	return '', status.HTTP_201_CREATED
 
 # decorator for each profile page
 @app.route("/profile/<username>", methods=('GET','POST'))
