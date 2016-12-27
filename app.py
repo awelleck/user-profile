@@ -1,27 +1,31 @@
 import psycopg2
+import os
 from flask import Flask, render_template, request
 from flask_api import status
 
 app = Flask(__name__)
-conn_string = "host='localhost' dbname='practice' user='' password=''"
+conn_string = "host='localhost' dbname='practice' user="+os.environ['USER']+" password="+os.environ['PASS']+")"
 
 # decorator for index
 @app.route("/", methods=('GET','POST'))
 def index():
-	if request.method == 'POST':
-		username = request.form['username']
-		password = request.form['password']
+	try:
+		if request.method == 'POST':
+			username = request.form['username']
+			password = request.form['password']
 
-		conn = psycopg2.connect(conn_string)
-		cursor = conn.cursor()
-		print ("Connected!\n")
+			conn = psycopg2.connect(conn_string)
+			cursor = conn.cursor()
+			print ("Connected!\n")
 
-		cursor.execute(
-			"""INSERT INTO practice (username, password)
-				VALUES (%s, %s);""",
-			(username, password))
-		conn.commit()
-		return render_template("index.html"), status.HTTP_201_CREATED
+			cursor.execute(
+				"""INSERT INTO practice (username, password)
+					VALUES (%s, %s);""",
+				(username, password))
+			conn.commit()
+			return render_template("index.html"), status.HTTP_201_CREATED
+	except Exception:
+		print ('ERROR')
 
 	return render_template("index.html")
 
