@@ -16,7 +16,7 @@ def index():
 
 			conn = psycopg2.connect(conn_string)
 			cursor = conn.cursor()
-			print ("Connected!\n")
+			print ("Connected!")
 
 			cursor.execute(
 				"""INSERT INTO practice (username, password)
@@ -25,7 +25,7 @@ def index():
 			conn.commit()
 			return render_template("index.html"), status.HTTP_201_CREATED
 	except Exception:
-		print ('ERROR')
+		return render_template("index.html", warning="Username "+username+" is already taken!"), status.HTTP_409_CONFLICT
 
 	return render_template("index.html")
 
@@ -34,7 +34,7 @@ def index():
 def to_db():
 	conn = psycopg2.connect(conn_string)
 	cursor = conn.cursor()
-	print ("Connected!\n")
+	print ("Connected!")
 
 	cursor.execute(
 		"""INSERT INTO practice (username, password)
