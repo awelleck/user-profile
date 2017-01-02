@@ -2,6 +2,6 @@ language: python
 python:
   - "3.5" #Python 3.5.2
 #Command to install dependencies
-install: pip install --user -r requirements.txt
+install: pip install -r requirements.txt
 script:
   - pep8 .
