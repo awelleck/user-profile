@@ -1,5 +1,5 @@
 # user-profile
-[![Build Status](https://travis-ci.org/awelleck/user-profile.svg?branch=master)](https://travis-ci.org/awelleck/
+[![Build Status](https://travis-ci.org/awelleck/user-profile.svg?branch=master)](https://travis-ci.org/awelleck/user-profile)
 
 Building a user profile system with authentication. Using this as a place for notes as I go along, hopefully most makes it in the final README or automation script.
 
