@@ -1,4 +1,5 @@
 # user-profile
+[![Build Status](https://travis-ci.org/awelleck/user-profile.svg?branch=master)](https://travis-ci.org/awelleck/
 
 Building a user profile system with authentication. Using this as a place for notes as I go along, hopefully most makes it in the final README or automation script.
 
@@ -18,4 +19,4 @@ Setting up virtualenv to use Python 3
 * `python app.py`
 
 To test
-* `curl -X POST -d "{ first_name: '', last_name: '' }" localhost:5000/db`
+* `curl -X POST -d "{ username: '', password: '' }" localhost:5000/db`
