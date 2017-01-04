@@ -16,6 +16,9 @@ def index():
             username = request.form['username']
             password = request.form['password']
 
+            #username.isspace() == true:
+            #name_err = "Enter a valid username!"
+
             conn = psycopg2.connect(conn_string)
             cursor = conn.cursor()
             print("Connected!")
