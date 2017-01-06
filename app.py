@@ -1,4 +1,6 @@
 import psycopg2
+import hashlib
+import uuid
 import os
 from flask import Flask, render_template, request
 from flask_api import status
@@ -7,17 +9,18 @@ app = Flask(__name__)
 conn_string = ("host=localhost dbname=practice user=" +
                os.environ['USER'] + " password=" + os.environ['PASS'])
 
+def hash_password(password):
+    salt = uuid.uuid4().hex
+    return hashlib.sha256(salt.encode() + password.encode()).hexdigest() + ':' + salt
 
-# decorator for index
-@app.route("/", methods=('GET', 'POST'))
+
+# route for index
+@app.route("/", methods=['GET', 'POST'])
 def index():
     try:
         if request.method == 'POST':
             username = request.form['username']
-            password = request.form['password']
-
-            #username.isspace() == true:
-            #name_err = "Enter a valid username!"
+            password = hash_password(request.form['password'])
 
             conn = psycopg2.connect(conn_string)
             cursor = conn.cursor()
@@ -33,12 +36,11 @@ def index():
         return render_template("index.html",
                                warning="Username " + username +
                                " is already taken!"), status.HTTP_409_CONFLICT
-
     return render_template("index.html")
 
 
-# decorator for db on GET or POST testing
-@app.route("/db", methods=('GET', 'POST'))
+# route for db on GET or POST testing
+@app.route("/db", methods=['GET', 'POST'])
 def to_db():
     conn = psycopg2.connect(conn_string)
     cursor = conn.cursor()
@@ -53,11 +55,12 @@ def to_db():
     return '', status.HTTP_201_CREATED
 
 
-# decorator for each profile page
-@app.route("/profile/<username>", methods=('GET', 'POST'))
+# route for each profile page
+@app.route("/profile/<username>", methods=['GET', 'POST'])
 def profile(username):
     conn = psycopg2.connect(conn_string)
     return render_template("profile.html", username=username)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
