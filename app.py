@@ -9,9 +9,11 @@ app = Flask(__name__)
 conn_string = ("host=localhost dbname=practice user=" +
                os.environ['USER'] + " password=" + os.environ['PASS'])
 
+
 def hash_password(password):
     salt = uuid.uuid4().hex
-    return hashlib.sha256(salt.encode() + password.encode()).hexdigest() + ':' + salt
+    return hashlib.sha256(salt.encode() + password.encode()).hexdigest() +
+    ':' + salt
 
 
 # route for index
