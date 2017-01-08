@@ -16,7 +16,10 @@ Setting up virtualenv to use Python 3
 * `source ENV/bin/activate`
 * `virtualenv -p python3 env`
 * `pip install -r requirements.txt`
-* `python app.py`
 
 To test
+* Source username and password for database
+* `python app.py`
 * `curl -X POST -d "{ username: '', password: '' }" localhost:5000/db`
+or
+* Use http://127.0.0.1:5000/ in browser
