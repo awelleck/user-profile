@@ -17,23 +17,38 @@
 
   <!-- Textfield with Floating Label -->
   <form method="POST" action="/">
+
+    {% if form.errors %}
+      <ul class="errors pad">
+        {% for field in form.errors %}
+        {% for error in form.errors[field] %}
+        <li>{{field}}: {{ error }}</li>
+        {% endfor %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+
     <div class="row pad">
-      <p>{{ warning }}</p>
-      <p>{{ name_err }}</p>
+      <!-- <p>{{ warning }}</p> -->
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" name="username">
+        <!-- <input class="mdl-textfield__input" type="text" name="username"> -->
+        {{ form.username(class_="mdl-textfield__input") }}
         <label class="mdl-textfield__label" for="sample3">username</label>
       </div>
     </div>
+
     <div class="row pad">
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" name="password">
+        <!-- <input class="mdl-textfield__input" type="text" name="password"> -->
+        {{ form.password(class_="mdl-textfield__input") }}
         <label class="mdl-textfield__label" for="sample3">password</label>
       </div>
     </div>
+
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad" type="submit">
       Submit
     </button>
+
   </form>
 </body>
 

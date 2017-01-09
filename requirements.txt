@@ -3,3 +3,4 @@ Flask-API
 SQLAlchemy
 psycopg2
 pep8
+WTForms

@@ -4,23 +4,28 @@ import uuid
 import os
 from flask import Flask, render_template, request
 from flask_api import status
+from wtforms import Form, StringField, PasswordField, validators
 
 app = Flask(__name__)
 conn_string = ("host=localhost dbname=practice user=" +
                os.environ['USER'] + " password=" + os.environ['PASS'])
 
 
+class LoginForm(Form):
+    username = StringField('Username', [validators.Length(min=4, max=25)])
+    password = PasswordField('New Password', [validators.Length(min=6, max=20)])
+
 def hash_password(password):
     salt = uuid.uuid4().hex
-    return hashlib.sha256(salt.encode() + password.encode()).hexdigest() +
-    ':' + salt
+    return hashlib.sha256(salt.encode() + password.encode()).hexdigest() + ':' + salt
 
 
 # route for index
 @app.route("/", methods=['GET', 'POST'])
 def index():
+    form = LoginForm(request.form)
     try:
-        if request.method == 'POST':
+        if request.method == 'POST' and form.validate():
             username = request.form['username']
             password = hash_password(request.form['password'])
 
@@ -38,7 +43,7 @@ def index():
         return render_template("index.html",
                                warning="Username " + username +
                                " is already taken!"), status.HTTP_409_CONFLICT
-    return render_template("index.html")
+    return render_template("index.html", form=form)
 
 
 # route for db on GET or POST testing
