@@ -12,12 +12,16 @@ conn_string = ("host=localhost dbname=practice user=" +
 
 
 class LoginForm(Form):
-    username = StringField('Username', [validators.Length(min=4, max=25)])
-    password = PasswordField('New Password', [validators.Length(min=6, max=20)])
+    username = StringField('Username',
+                           [validators.Length(min=2, max=20)])
+    password = PasswordField('New Password',
+                             [validators.Length(min=8, max=20)])
+
 
 def hash_password(password):
     salt = uuid.uuid4().hex
-    return hashlib.sha256(salt.encode() + password.encode()).hexdigest() + ':' + salt
+    return hashlib.sha256(salt.encode() +
+                          password.encode()).hexdigest() + ':' + salt
 
 
 # route for index
