@@ -19,13 +19,13 @@
   <form method="POST" action="/">
 
     {% if form.errors %}
-      <ul class="errors pad">
+      <div class="errors pad">
         {% for field in form.errors %}
         {% for error in form.errors[field] %}
-        <li>{{field}}: {{ error }}</li>
+        <p>{{field}}: {{ error }}</p>
         {% endfor %}
         {% endfor %}
-      </ul>
+      </div>
     {% endif %}
 
     <div class="row pad">
@@ -46,7 +46,7 @@
     </div>
 
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad" type="submit">
-      Submit
+      Login
     </button>
 
   </form>
