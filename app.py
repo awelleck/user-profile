@@ -18,6 +18,15 @@ class LoginForm(Form):
                              [validators.Length(min=8, max=20)])
 
 
+class RegistrationForm(Form):
+    username = StringField('Username',
+                           [validators.Length(min=2, max=20)])
+    password = PasswordField('New Password',
+                             [validators.Length(min=8, max=20)])
+    email = StringField('Email Address',
+                        [validators.Length(min=6, max=35)])
+
+
 def hash_password(password):
     salt = uuid.uuid4().hex
     return hashlib.sha256(salt.encode() +
@@ -42,12 +51,24 @@ def index():
                     VALUES (%s, %s);""",
                 (username, password))
             conn.commit()
-            return render_template("index.html"), status.HTTP_201_CREATED
+            return render_template("index.html",
+                                   form=form), status.HTTP_201_CREATED
     except Exception:
-        return render_template("index.html",
+        return render_template("index.html", form=form,
                                warning="Username " + username +
                                " is already taken!"), status.HTTP_409_CONFLICT
     return render_template("index.html", form=form)
+
+
+# route for registration page
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        conn = psycopg2.connect(conn_string)
+        cursor = conn.cursor()
+        print("Connected!")
+    return render_template("register.html", form=form)
 
 
 # route for db on GET or POST testing
