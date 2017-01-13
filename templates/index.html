@@ -31,7 +31,6 @@
     <div class="row pad">
       <!-- <p>{{ warning }}</p> -->
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <!-- <input class="mdl-textfield__input" type="text" name="username"> -->
         {{ form.username(class_="mdl-textfield__input") }}
         <label class="mdl-textfield__label">username</label>
       </div>
@@ -39,7 +38,6 @@
 
     <div class="row pad">
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <!-- <input class="mdl-textfield__input" type="text" name="password"> -->
         {{ form.password(class_="mdl-textfield__input") }}
         <label class="mdl-textfield__label">password</label>
       </div>
@@ -48,8 +46,11 @@
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad" type="submit">
       Login
     </button>
-
   </form>
+
+  <a href="{{ url_for('register') }}"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad pad_top">
+    Register
+  </button></a>
 </body>
 
 </html>
