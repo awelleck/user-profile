@@ -65,6 +65,12 @@ def index():
 def register():
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
+        username = request.form['username']
+        password = hash_password(request.form['password'])
+        email = request.form['email']
+
+        print(username+"\n"+password+"\n"+email)
+
         conn = psycopg2.connect(conn_string)
         cursor = conn.cursor()
         print("Connected!")
