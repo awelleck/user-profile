@@ -18,8 +18,15 @@ Setting up virtualenv to use Python 3
 * `pip install -r requirements.txt`
 
 To test
+
 * Source username and password for database
 * `python app.py`
 * `curl -X POST -d "{ username: '', password: '' }" localhost:5000/db`
+
 or
 * Use http://127.0.0.1:5000/ in browser
+
+To dump/restore PostgreSQL database
+
+* `pg_dump dbname > outfile`
+* `psql dbname < infile`
