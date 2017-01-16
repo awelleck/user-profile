@@ -25,6 +25,10 @@ class RegistrationForm(Form):
                              [validators.Length(min=8, max=20)])
     email = StringField('Email Address',
                         [validators.Length(min=6, max=35)])
+    first_name = StringField('First Name',
+                             [validators.Length(min=2, max=35)])
+    last_name = StringField('Last Name',
+                            [validators.Length(min=2, max=35)])
 
 
 def hash_password(password):
@@ -68,12 +72,23 @@ def register():
         username = request.form['username']
         password = hash_password(request.form['password'])
         email = request.form['email']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
 
-        print(username+"\n"+password+"\n"+email)
+        print(username+"\n"+password+"\n"+email+"\n"+first_name+"\n"+last_name)
 
         conn = psycopg2.connect(conn_string)
         cursor = conn.cursor()
         print("Connected!")
+
+        cursor.execute(
+            """INSERT INTO practice (username, password, email, first_name, last_name)
+                VALUES (%s, %s, %s, %s, %s);""",
+            (username, password, email, first_name, last_name))
+        conn.commit()
+        return render_template("index.html",
+                               form=form), status.HTTP_201_CREATED
+
     return render_template("register.html", form=form)
 
 
