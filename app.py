@@ -2,7 +2,7 @@ import psycopg2
 import hashlib
 import uuid
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 from flask_api import status
 from wtforms import Form, StringField, PasswordField, validators
 
@@ -37,24 +37,34 @@ def hash_password(password):
                           password.encode()).hexdigest() + ':' + salt
 
 
+def check_password(hashed_password, user_password):
+    password, salt = hashed_password.split(':')
+    return password == hashlib.sha256(salt.encode() +
+                                      user_password.encode()).hexdigest()
+
+
 # route for index
 @app.route("/", methods=['GET', 'POST'])
 def index():
     form = LoginForm(request.form)
     try:
-        if request.method == 'POST' and form.validate():
+        if request.method == 'POST':
             username = request.form['username']
-            password = hash_password(request.form['password'])
+            user_password = request.form['password']
 
             conn = psycopg2.connect(conn_string)
             cursor = conn.cursor()
             print("Connected!")
 
             cursor.execute(
-                """INSERT INTO practice (username, password)
-                    VALUES (%s, %s);""",
-                (username, password))
-            conn.commit()
+                """SELECT password FROM practice WHERE username = (%s)""",
+                (username,))
+
+            hashed_password_tuple = cursor.fetchone()
+            hashed_password = hashed_password_tuple[0]
+            login = check_password(hashed_password, user_password)
+            print(login)
+
             return render_template("index.html",
                                    form=form), status.HTTP_201_CREATED
     except Exception:
