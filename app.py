@@ -2,13 +2,14 @@ import psycopg2
 import hashlib
 import uuid
 import os
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 from flask_api import status
 from wtforms import Form, StringField, PasswordField, validators
 
 app = Flask(__name__)
 conn_string = ("host=localhost dbname=practice user=" +
                os.environ['USER'] + " password=" + os.environ['PASS'])
+app.secret_key = os.environ['KEY']
 
 
 class LoginForm(Form):
@@ -47,6 +48,7 @@ def check_password(hashed_password, user_password):
 @app.route("/", methods=['GET', 'POST'])
 def index():
     form = LoginForm(request.form)
+    session.pop('username', None)
     try:
         if request.method == 'POST':
             username = request.form['username']
@@ -64,6 +66,11 @@ def index():
             hashed_password = hashed_password_tuple[0]
             login = check_password(hashed_password, user_password)
             print(login)
+
+            if login == True:
+                session['username'] = request.form['username']
+                print("Session active!")
+                return redirect(url_for('profile', username=username))
 
             return render_template("index.html",
                                    form=form), status.HTTP_201_CREATED
@@ -121,7 +128,7 @@ def to_db():
 # route for each profile page
 @app.route("/profile/<username>", methods=['GET', 'POST'])
 def profile(username):
-    conn = psycopg2.connect(conn_string)
+    #conn = psycopg2.connect(conn_string)
     return render_template("profile.html", username=username)
 
 
