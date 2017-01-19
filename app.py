@@ -67,7 +67,7 @@ def index():
             login = check_password(hashed_password, user_password)
             print(login)
 
-            if login == True:
+            if login is True:
                 session['username'] = request.form['username']
                 print("Session active!")
                 return redirect(url_for('profile', username=username))
@@ -128,7 +128,7 @@ def to_db():
 # route for each profile page
 @app.route("/profile/<username>", methods=['GET', 'POST'])
 def profile(username):
-    #conn = psycopg2.connect(conn_string)
+    conn = psycopg2.connect(conn_string)
     return render_template("profile.html", username=username)
 
 
