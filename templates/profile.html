@@ -12,6 +12,14 @@
 </head>
 <body>
   <p class="centered">profile.html</p>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <p class="pad">{{ message }}</p>
+    {% endif %}
+  {% endwith %}
+
   <p class="pad">{{ username }}'s profile</p>
+
 </body>
 </html>

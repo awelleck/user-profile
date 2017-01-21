@@ -2,7 +2,7 @@ import psycopg2
 import hashlib
 import uuid
 import os
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 from flask_api import status
 from wtforms import Form, StringField, PasswordField, validators
 
@@ -70,6 +70,7 @@ def index():
             if login is True:
                 session['username'] = request.form['username']
                 print("Session active!")
+                flash("You are logged in!")
                 return redirect(url_for('profile', username=username))
 
             return render_template("index.html",
