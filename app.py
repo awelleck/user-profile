@@ -65,7 +65,7 @@ def index():
             hashed_password_tuple = cursor.fetchone()
             hashed_password = hashed_password_tuple[0]
             login = check_password(hashed_password, user_password)
-            print(login)
+            print("%s: you are logged in!" % login)
 
             if login is True:
                 session['username'] = request.form['username']
