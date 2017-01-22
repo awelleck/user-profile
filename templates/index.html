@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<meta charset="utf-8"/>
-<!-- Material -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-<!-- custom -->
-<link href="{{ url_for('static', filename='style.css') }}" type="text/css" rel="stylesheet">
-<title>Index</title>
-</head>
-
-<body>
+{% extends "layout.html" %}
+{% block index %}
   <p class="centered">index.html</p>
 
   <!-- Textfield with Floating Label -->
@@ -51,6 +38,4 @@
   <a href="{{ url_for('register') }}"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad pad_top">
     Register
   </button></a>
-</body>
-
-</html>
+{% endblock %}
