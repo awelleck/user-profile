@@ -2,7 +2,9 @@ import psycopg2
 import hashlib
 import uuid
 import os
-from flask import Flask, render_template, request, session, redirect, url_for, flash
+
+from flask import Flask, render_template, request, session, redirect, \
+    url_for, flash
 from flask_api import status
 from wtforms import Form, StringField, PasswordField, validators
 
