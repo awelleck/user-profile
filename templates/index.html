@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block title %}Index{% endblock %}
 {% block index %}
-  <p class="centered">index.html</p>
+  <h4 class="mdl-typography--text-center">index.html</h4>
 
   <!-- Textfield with Floating Label -->
   <form method="POST" action="/">
@@ -17,7 +17,6 @@
     {% endif %}
 
     <div class="row pad">
-      <!-- <p>{{ warning }}</p> -->
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         {{ form.username(class_="mdl-textfield__input") }}
         <label class="mdl-textfield__label">username</label>
