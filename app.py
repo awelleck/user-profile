@@ -7,6 +7,7 @@ from flask import Flask, render_template, request, session, redirect, \
     url_for, flash
 from flask_api import status
 from wtforms import Form, StringField, PasswordField, validators
+from functools import wraps
 
 app = Flask(__name__)
 conn_string = ("host=localhost dbname=practice user=" +
@@ -46,11 +47,22 @@ def check_password(hashed_password, user_password):
                                       user_password.encode()).hexdigest()
 
 
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        print(args)
+        print(kwargs)
+        if any(session) is False:
+            return redirect(url_for('index', next=request.url))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
 # route for index
 @app.route("/", methods=['GET', 'POST'])
 def index():
     form = LoginForm(request.form)
-    session.pop('username', None)
+    #session.pop('username', None)
     try:
         if request.method == 'POST':
             username = request.form['username']
@@ -72,6 +84,7 @@ def index():
             if login is True:
                 session['username'] = request.form['username']
                 print("Session active!")
+                print(session)
                 flash("You are logged in!")
                 return redirect(url_for('profile', username=username))
 
@@ -130,10 +143,23 @@ def to_db():
 
 # route for each profile page
 @app.route("/profile/<username>", methods=['GET', 'POST'])
+@login_required
 def profile(username):
     conn = psycopg2.connect(conn_string)
     return render_template("profile.html", username=username)
 
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    print(session)
+    return redirect(url_for('index'))
+
+@app.route('/test')
+def test():
+    print(session)
+    if any(session) is False:
+        print("yep if statement works")
+    return '', status.HTTP_201_CREATED
 
 if __name__ == "__main__":
     app.run(debug=True)
