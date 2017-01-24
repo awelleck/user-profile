@@ -62,7 +62,7 @@ def login_required(f):
 @app.route("/", methods=['GET', 'POST'])
 def index():
     form = LoginForm(request.form)
-    #session.pop('username', None)
+    # session.pop('username', None)
     try:
         if request.method == 'POST':
             username = request.form['username']
@@ -148,11 +148,13 @@ def profile(username):
     conn = psycopg2.connect(conn_string)
     return render_template("profile.html", username=username)
 
+
 @app.route('/logout')
 def logout():
     session.pop('username', None)
     print(session)
     return redirect(url_for('index'))
+
 
 @app.route('/test')
 def test():
