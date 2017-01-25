@@ -10,3 +10,12 @@
 .pad_top {
   margin-top: 1em;
 }
+
+.download a {
+  text-decoration: none;
+}
+
+.download {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
