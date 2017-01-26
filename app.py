@@ -145,12 +145,23 @@ def to_db():
 @app.route("/profile/<username>", methods=['GET', 'POST'])
 @login_required
 def profile(username):
-    conn = psycopg2.connect(conn_string)
+    print(username)
+    print(session['username'])
+    if username != session['username']:
+        return redirect(url_for('index'))
+
+    if request.method == 'POST':
+        return redirect(url_for('logout'))
+
     return render_template("profile.html", username=username)
 
 
-@app.route('/logout')
+@app.route('/logout', methods=['GET', 'POST'])
 def logout():
+    if request.method == 'POST':
+        session.pop('username', None)
+        return redirect(url_for('index'))
+
     session.pop('username', None)
     print(session)
     return redirect(url_for('index'))
@@ -160,7 +171,7 @@ def logout():
 def test():
     print(session)
     if any(session) is False:
-        print("yep if statement works")
+        print("works")
     return '', status.HTTP_201_CREATED
 
 if __name__ == "__main__":

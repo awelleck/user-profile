@@ -12,4 +12,8 @@
   {% endwith %}
 
   <p class="pad">{{ username }}'s profile</p>
+
+  <a href="{{ url_for('logout') }}"><button class="mdl-button mdl-js-button mdl-button--raised  mdl-button--colored pad">
+    Logout
+  </button></a>
 {% endblock %}
