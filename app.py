@@ -129,7 +129,7 @@ def register():
 @app.route('/profile/<username>', methods=['GET', 'POST'])
 @login_required
 def profile(username):
-    print('Printing session user: %s' % session['username'])
+    print('Printing session[\'username\']: %s' % session['username'])
     if username != session['username']:
         return redirect(url_for('index'))
 

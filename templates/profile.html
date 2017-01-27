@@ -1,19 +1,21 @@
 {% extends "layout.html" %}
 {% block title %}Profile{% endblock %}
 {% block profile %}
-  <h4 class="mdl-typography--text-center">profile.html</h4>
+  <section class="input_section mdl-color--blue-50">
+    <h4 class="mdl-typography--text-center">profile.html</h4>
 
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      {% for message in messages %}
-        <p class="pad">{{ message }}</p>
-      {% endfor %}
-    {% endif %}
-  {% endwith %}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <p class="pad">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
 
-  <p class="pad">{{ username }}'s profile</p>
+    <p class="pad">{{ username }}'s profile</p>
 
-  <a href="{{ url_for('logout') }}"><button class="mdl-button mdl-js-button mdl-button--raised  mdl-button--colored pad">
-    Logout
-  </button></a>
+    <a href="{{ url_for('logout') }}"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad">
+      Logout
+    </button></a>
+  </section>
 {% endblock %}
