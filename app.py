@@ -8,10 +8,11 @@ from flask import Flask, render_template, request, session, redirect, \
 from flask_api import status
 from wtforms import Form, StringField, PasswordField, validators
 from functools import wraps
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-conn_string = ("host=localhost dbname=practice user=" +
-               os.environ['USER'] + " password=" + os.environ['PASS'])
+conn_string = ('host=localhost dbname=practice user=' +
+               os.environ['USER'] + ' password=' + os.environ['PASS'])
 app.secret_key = os.environ['KEY']
 
 
@@ -50,16 +51,15 @@ def check_password(hashed_password, user_password):
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        print(args)
-        print(kwargs)
         if any(session) is False:
             return redirect(url_for('index', next=request.url))
         return f(*args, **kwargs)
+
     return decorated_function
 
 
 # route for index
-@app.route("/", methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     form = LoginForm(request.form)
     # session.pop('username', None)
@@ -70,7 +70,7 @@ def index():
 
             conn = psycopg2.connect(conn_string)
             cursor = conn.cursor()
-            print("Connected!")
+            print('Connected!')
 
             cursor.execute(
                 """SELECT password FROM practice WHERE username = (%s)""",
@@ -79,26 +79,26 @@ def index():
             hashed_password_tuple = cursor.fetchone()
             hashed_password = hashed_password_tuple[0]
             login = check_password(hashed_password, user_password)
-            print("%s: you are logged in!" % login)
+            print('%s: you are logged in!' % login)
 
             if login is True:
                 session['username'] = request.form['username']
-                print("Session active!")
+                print('Session active!')
                 print(session)
-                flash("You are logged in!")
+                flash('You are logged in!')
                 return redirect(url_for('profile', username=username))
 
-            return render_template("index.html",
+            return render_template('index.html',
                                    form=form), status.HTTP_201_CREATED
     except Exception:
-        return render_template("index.html", form=form,
-                               warning="Username " + username +
-                               " is already taken!"), status.HTTP_409_CONFLICT
-    return render_template("index.html", form=form)
+        return render_template('index.html', form=form,
+                               warning='Username ' + username +
+                               ' is already taken!'), status.HTTP_409_CONFLICT
+    return render_template('index.html', form=form)
 
 
 # route for registration page
-@app.route("/register", methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
@@ -108,71 +108,58 @@ def register():
         first_name = request.form['first_name']
         last_name = request.form['last_name']
 
-        print(username+"\n"+password+"\n"+email+"\n"+first_name+"\n"+last_name)
+        print(username+'\n'+password+'\n'+email+'\n'+first_name+'\n'+last_name)
 
         conn = psycopg2.connect(conn_string)
         cursor = conn.cursor()
-        print("Connected!")
+        print('Connected!')
 
         cursor.execute(
             """INSERT INTO practice (username, password, email, first_name, last_name)
                 VALUES (%s, %s, %s, %s, %s);""",
             (username, password, email, first_name, last_name))
         conn.commit()
-        return render_template("index.html",
+        return render_template('index.html',
                                form=form), status.HTTP_201_CREATED
 
-    return render_template("register.html", form=form)
-
-
-# route for db on GET or POST testing
-@app.route("/db", methods=['GET', 'POST'])
-def to_db():
-    conn = psycopg2.connect(conn_string)
-    cursor = conn.cursor()
-    print("Connected!")
-
-    cursor.execute(
-        """INSERT INTO practice (username, password)
-            VALUES (%s, %s);""",
-        ('one', 'two'))
-    conn.commit()
-
-    return '', status.HTTP_201_CREATED
+    return render_template('register.html', form=form)
 
 
 # route for each profile page
-@app.route("/profile/<username>", methods=['GET', 'POST'])
+@app.route('/profile/<username>', methods=['GET', 'POST'])
 @login_required
 def profile(username):
-    print(username)
-    print(session['username'])
+    print('Printing session user: %s' % session['username'])
     if username != session['username']:
         return redirect(url_for('index'))
 
     if request.method == 'POST':
         return redirect(url_for('logout'))
 
-    return render_template("profile.html", username=username)
+    return render_template('profile.html', username=username)
 
 
+# logout route for button
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     if request.method == 'POST':
         session.pop('username', None)
+        print('Logged out!')
         return redirect(url_for('index'))
 
     session.pop('username', None)
-    print(session)
+    print('Logged out!')
     return redirect(url_for('index'))
 
 
+# route for testing only
 @app.route('/test')
 def test():
-    print(session)
+    print('Current session: %s' % session)
     if any(session) is False:
-        print("works")
-    return '', status.HTTP_201_CREATED
+        print('Empty session!')
+
+    return '', status.HTTP_200_OK
 
 if __name__ == "__main__":
     app.run(debug=True)
