@@ -9,6 +9,7 @@ from flask_api import status
 from wtforms import Form, StringField, PasswordField, validators
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
+from db import User
 
 app = Flask(__name__)
 conn_string = ('host=localhost dbname=practice user=' +
@@ -159,7 +160,9 @@ def test():
     if any(session) is False:
         print('Empty session!')
 
-    return '', status.HTTP_200_OK
+    from_db = User.query.all()
+    print(from_db)
+    return 'Test page!', status.HTTP_200_OK
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
