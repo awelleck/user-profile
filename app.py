@@ -66,23 +66,14 @@ def login_required(f):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = LoginForm(request.form)
-    # session.pop('username', None)
+
     try:
         if request.method == 'POST':
             username = request.form['username']
             user_password = request.form['password']
 
-            conn = psycopg2.connect(conn_string)
-            cursor = conn.cursor()
-            print('Connected!')
-
-            cursor.execute(
-                """SELECT password FROM practice WHERE username = (%s)""",
-                (username,))
-
-            hashed_password_tuple = cursor.fetchone()
-            hashed_password = hashed_password_tuple[0]
-            login = check_password(hashed_password, user_password)
+            hashed_password = User.query.filter_by(username=username).first()
+            login = check_password(hashed_password.password, user_password)
             print('%s: you are logged in!' % login)
 
             if login is True:
@@ -105,6 +96,7 @@ def index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm(request.form)
+
     if request.method == 'POST' and form.validate():
         username = request.form['username']
         password = hash_password(request.form['password'])
