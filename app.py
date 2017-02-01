@@ -9,12 +9,15 @@ from flask_api import status
 from wtforms import Form, StringField, PasswordField, validators
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
+
 from db import User
 
 app = Flask(__name__)
 conn_string = ('host=localhost dbname=practice user=' +
                os.environ['USER'] + ' password=' + os.environ['PASS'])
 app.secret_key = os.environ['KEY']
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
 
 class LoginForm(Form):
@@ -111,15 +114,9 @@ def register():
 
         print(username+'\n'+password+'\n'+email+'\n'+first_name+'\n'+last_name)
 
-        conn = psycopg2.connect(conn_string)
-        cursor = conn.cursor()
-        print('Connected!')
+        submit_db = User(username, password, email, first_name, last_name)
+        User.insert(submit_db)
 
-        cursor.execute(
-            """INSERT INTO practice (username, password, email, first_name, last_name)
-                VALUES (%s, %s, %s, %s, %s);""",
-            (username, password, email, first_name, last_name))
-        conn.commit()
         return render_template('index.html',
                                form=form), status.HTTP_201_CREATED
 

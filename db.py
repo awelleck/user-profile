@@ -21,6 +21,10 @@ class User(db.Model):
     last_name = db.Column(db.String(25))
     id = db.Column(db.Integer, primary_key=True)
 
+    def insert(submit_db):
+        db.session.add(submit_db)
+        db.session.commit()
+
     def __init__(self, username, password, email, first_name, last_name):
         self.username = username
         self.password = password
