@@ -1,4 +1,3 @@
-import psycopg2
 import hashlib
 import uuid
 import os
@@ -13,8 +12,6 @@ from flask_sqlalchemy import SQLAlchemy
 from db import User
 
 app = Flask(__name__)
-conn_string = ('host=localhost dbname=practice user=' +
-               os.environ['USER'] + ' password=' + os.environ['PASS'])
 app.secret_key = os.environ['KEY']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -122,6 +119,17 @@ def profile(username):
     print('Printing session[\'username\']: %s' % session['username'])
     if username != session['username']:
         return redirect(url_for('index'))
+
+    if request.method == 'GET':
+        load_profile = User.query.filter_by(username=session['username']
+                                            ).first()
+        user = load_profile.username
+        email = load_profile.email
+        first_name = load_profile.first_name
+        last_name = load_profile.last_name
+        return render_template('profile.html', username=username, user=user,
+                               email=email, first_name=first_name,
+                               last_name=last_name)
 
     if request.method == 'POST':
         return redirect(url_for('logout'))
