@@ -101,11 +101,11 @@ def register():
             submit_db = User(username, password, email, first_name, last_name)
             User.insert(submit_db)
             return render_template('index.html',
-                               form=form), status.HTTP_201_CREATED
+                                   form=form), status.HTTP_201_CREATED
         except exc.SQLAlchemyError as e:
             print(e)
             pass
-            #return render_template('register.html', form=form)
+            # return render_template('register.html', form=form)
 
     return render_template('register.html', form=form)
 
