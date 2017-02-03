@@ -8,6 +8,7 @@ from flask_api import status
 from wtforms import Form, StringField, PasswordField, validators
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import exc
 
 from db import User
 
@@ -64,28 +65,21 @@ def login_required(f):
 def index():
     form = LoginForm(request.form)
 
-    try:
-        if request.method == 'POST':
-            username = request.form['username']
-            user_password = request.form['password']
+    if request.method == 'POST' and form.validate():
+        username = request.form['username']
+        user_password = request.form['password']
+        hashed_password = User.query.filter_by(username=username).first()
+        login = check_password(hashed_password.password, user_password)
+        print('%s: you are logged in!' % login)
 
-            hashed_password = User.query.filter_by(username=username).first()
-            login = check_password(hashed_password.password, user_password)
-            print('%s: you are logged in!' % login)
-
-            if login is True:
-                session['username'] = request.form['username']
-                print('Session active!')
-                print(session)
-                flash('You are logged in!')
-                return redirect(url_for('profile', username=username))
-
-            return render_template('index.html',
-                                   form=form), status.HTTP_201_CREATED
-    except Exception:
-        return render_template('index.html', form=form,
-                               warning='Username ' + username +
-                               ' is already taken!'), status.HTTP_409_CONFLICT
+        if login is True:
+            session['username'] = request.form['username']
+            print('Session active!')
+            print(session)
+            flash('You are logged in!')
+            return redirect(url_for('profile', username=username))
+        return render_template('index.html',
+                               form=form), status.HTTP_201_CREATED
     return render_template('index.html', form=form)
 
 
@@ -103,11 +97,15 @@ def register():
 
         print(username+'\n'+password+'\n'+email+'\n'+first_name+'\n'+last_name)
 
-        submit_db = User(username, password, email, first_name, last_name)
-        User.insert(submit_db)
-
-        return render_template('index.html',
+        try:
+            submit_db = User(username, password, email, first_name, last_name)
+            User.insert(submit_db)
+            return render_template('index.html',
                                form=form), status.HTTP_201_CREATED
+        except exc.SQLAlchemyError as e:
+            print(e)
+            pass
+            #return render_template('register.html', form=form)
 
     return render_template('register.html', form=form)
 
