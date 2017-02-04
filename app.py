@@ -102,11 +102,10 @@ def register():
             User.insert(submit_db)
             return render_template('index.html',
                                    form=form), status.HTTP_201_CREATED
-        except exc.SQLAlchemyError as e:
-            print(e)
-            pass
-            # return render_template('register.html', form=form)
-
+        except exc.SQLAlchemyError:
+            warn = 'Username \'' + username + '\' is already taken!'
+            return render_template('register.html', form=form,
+                                   warn=warn), status.HTTP_409_CONFLICT
     return render_template('register.html', form=form)
 
 
@@ -128,10 +127,8 @@ def profile(username):
         return render_template('profile.html', username=username, user=user,
                                email=email, first_name=first_name,
                                last_name=last_name)
-
     if request.method == 'POST':
         return redirect(url_for('logout'))
-
     return render_template('profile.html', username=username)
 
 
