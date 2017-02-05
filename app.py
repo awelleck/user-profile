@@ -105,7 +105,6 @@ def register():
                                    form=form), status.HTTP_201_CREATED
         except exc.SQLAlchemyError as e:
             str_e = str(e)
-            print(str_e)
             user_exept = 'practice_username_key'
             email_exept = 'practice_email_key'
             if user_exept in str_e:
@@ -118,6 +117,11 @@ def register():
                 User.rollback()
                 return render_template('register.html', form=form,
                                        warn=warn), status.HTTP_409_CONFLICT
+            else:
+                warn = 'Database error!'
+                print(str_e)
+                return (render_template('register.html', form=form, warn=warn),
+                        status.HTTP_500_INTERNAL_SERVER_ERROR)
     return render_template('register.html', form=form)
 
 
