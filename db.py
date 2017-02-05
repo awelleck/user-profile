@@ -25,6 +25,9 @@ class User(db.Model):
         db.session.add(submit_db)
         db.session.commit()
 
+    def rollback():
+        db.session.rollback()
+
     def __init__(self, username, password, email, first_name, last_name):
         self.username = username
         self.password = password

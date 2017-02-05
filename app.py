@@ -89,23 +89,35 @@ def register():
     form = RegistrationForm(request.form)
 
     if request.method == 'POST' and form.validate():
-        username = request.form['username']
-        password = hash_password(request.form['password'])
-        email = request.form['email']
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-
-        print(username+'\n'+password+'\n'+email+'\n'+first_name+'\n'+last_name)
-
         try:
+            username = request.form['username']
+            password = hash_password(request.form['password'])
+            email = request.form['email']
+            first_name = request.form['first_name']
+            last_name = request.form['last_name']
+
+            print(username + '\n' + password + '\n' + email + '\n' +
+                  first_name + '\n' + last_name)
+
             submit_db = User(username, password, email, first_name, last_name)
             User.insert(submit_db)
             return render_template('index.html',
                                    form=form), status.HTTP_201_CREATED
-        except exc.SQLAlchemyError:
-            warn = 'Username \'' + username + '\' is already taken!'
-            return render_template('register.html', form=form,
-                                   warn=warn), status.HTTP_409_CONFLICT
+        except exc.SQLAlchemyError as e:
+            str_e = str(e)
+            print(str_e)
+            user_exept = 'practice_username_key'
+            email_exept = 'practice_email_key'
+            if user_exept in str_e:
+                warn = 'Username \'' + username + '\' is already taken!'
+                User.rollback()
+                return render_template('register.html', form=form,
+                                       warn=warn), status.HTTP_409_CONFLICT
+            elif email_exept in str_e:
+                warn = 'Email address \'' + email + '\' is already taken!'
+                User.rollback()
+                return render_template('register.html', form=form,
+                                       warn=warn), status.HTTP_409_CONFLICT
     return render_template('register.html', form=form)
 
 
