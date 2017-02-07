@@ -21,8 +21,16 @@ class User(db.Model):
     last_name = db.Column(db.String(25))
     id = db.Column(db.Integer, primary_key=True)
 
+    def query_pwd(username):
+        db_entry = User.query.filter_by(username=username).first()
+        return db_entry
+
     def insert(submit_db):
         db.session.add(submit_db)
+        db.session.commit()
+
+    def delete(username):
+        db.session.delete(username)
         db.session.commit()
 
     def rollback():
