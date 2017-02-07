@@ -68,8 +68,13 @@ def index():
     if request.method == 'POST' and form.validate():
         username = request.form['username']
         user_password = request.form['password']
-        hashed_password = User.query.filter_by(username=username).first()
-        login = check_password(hashed_password.password, user_password)
+        hashed_password = User.query_pwd(username=username)
+
+        if hashed_password is None:
+            warn = 'Username or password was incorrect!'
+            return (render_template('index.html', form=form, warn=warn),
+                    status.HTTP_409_CONFLICT)
+        login = check_password(hashed_password, user_password)
         print('%s: you are logged in!' % login)
 
         if login is True:
@@ -78,6 +83,7 @@ def index():
             print(session)
             flash('You are logged in!')
             return redirect(url_for('profile', username=username))
+
         return render_template('index.html',
                                form=form), status.HTTP_201_CREATED
     return render_template('index.html', form=form)
