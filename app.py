@@ -68,17 +68,23 @@ def index():
     if request.method == 'POST' and form.validate():
         username = request.form['username']
         user_password = request.form['password']
-        hashed_password = User.query_pwd(username=username)
 
-        if hashed_password is None:
+        try:
+            hashed_password = User.query_pwd(username=username).password
+        except AttributeError:
             warn = 'Username or password was incorrect!'
             return (render_template('index.html', form=form, warn=warn),
-                    status.HTTP_409_CONFLICT)
-        login = check_password(hashed_password, user_password)
-        print('%s: you are logged in!' % login)
+                    status.HTTP_406_NOT_ACCEPTABLE)
 
-        if login is True:
+        login = check_password(hashed_password, user_password)
+
+        if login is False:
+            warn = 'Username or password was incorrect!'
+            return (render_template('index.html', form=form, warn=warn),
+                    status.HTTP_406_NOT_ACCEPTABLE)
+        elif login is True:
             session['username'] = request.form['username']
+            print('%s: you are logged in!' % login)
             print('Session active!')
             print(session)
             flash('You are logged in!')
@@ -111,8 +117,8 @@ def register():
                                    form=form), status.HTTP_201_CREATED
         except exc.SQLAlchemyError as e:
             str_e = str(e)
-            user_exept = 'practice_username_key'
-            email_exept = 'practice_email_key'
+            user_exept = 'entries_username_key'
+            email_exept = 'entries_email_key'
             if user_exept in str_e:
                 warn = 'Username \'' + username + '\' is already taken!'
                 User.rollback()

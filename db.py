@@ -12,14 +12,14 @@ db = SQLAlchemy(app)
 
 
 class User(db.Model):
-    __tablename__ = 'practice'
+    __tablename__ = 'entries'
 
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(100))
     email = db.Column(db.String(25), unique=True)
     first_name = db.Column(db.String(25))
     last_name = db.Column(db.String(25))
-    id = db.Column(db.Integer, primary_key=True)
 
     def query_pwd(username):
         db_entry = User.query.filter_by(username=username).first()
