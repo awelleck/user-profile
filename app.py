@@ -187,9 +187,16 @@ def test():
     return 'Test page!', status.HTTP_200_OK
 
 
+# route for chat
+@app.route('/chat')
+def chat():
+    return render_template('chat.html')
+
+
 @socketio.on('my event')
 def test_message(message):
     emit('my response', {'data': 'got it!'})
+    print(message)
 
 
 if __name__ == '__main__':
