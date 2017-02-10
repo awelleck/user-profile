@@ -9,6 +9,7 @@ from wtforms import Form, StringField, PasswordField, validators
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
+from flask_socketio import SocketIO, emit
 
 from db import User
 
@@ -16,6 +17,7 @@ app = Flask(__name__)
 app.secret_key = os.environ['KEY']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+socketio = SocketIO(app)
 
 
 class LoginForm(Form):
@@ -184,5 +186,11 @@ def test():
     print(from_db)
     return 'Test page!', status.HTTP_200_OK
 
+
+@socketio.on('my event')
+def test_message(message):
+    emit('my response', {'data': 'got it!'})
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)
