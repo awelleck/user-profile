@@ -9,7 +9,7 @@ from wtforms import Form, StringField, PasswordField, validators
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit, send
 
 from db import User
 
@@ -193,10 +193,10 @@ def chat():
     return render_template('chat.html')
 
 
-@socketio.on('my event')
-def test_message(message):
-    emit('my response', {'data': 'got it!'})
-    print(message)
+@socketio.on('message')
+def test_message(msg):
+    print(msg)
+    send(msg, broadcast=True)
 
 
 if __name__ == '__main__':
