@@ -24,3 +24,12 @@
   padding-top: 1em;
   padding-bottom: 10em;
 }
+
+ul {
+  list-style-type: none;
+  margin-left: 2em;
+}
+
+.pad_send {
+  margin-left: 2em;
+}

@@ -1,22 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<meta charset="utf-8"/>
-<title>Chat</title>
+{% extends "layout.html" %}
+{% block title %}Chat{% endblock %}
+{% block socketio %}
+<!-- socket.io -->
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-{% block javascript %}
 <script type="text/javascript" charset="utf-8">
 {% include "connection.js" %}
 </script>
 {% endblock %}
-</head>
-
-<body>
-<p>SocketIO test!</p>
+{% block chat %}
+<h4 class="mdl-typography--text-center">chat.html</h4>
 <ul id="messages"></ul>
-<input type="text" id="input">
-<button id="submit">Send</button>
-</body>
-</html>
+<form class="pad" action="#">
+  <div class="mdl-textfield mdl-js-textfield">
+    <input class="mdl-textfield__input" type="text" id="input">
+    <label class="mdl-textfield__label" for="sample1">send</label>
+  </div>
+  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad_send" type="submit" id="submit">
+    Send
+  </button>
+</form>
+{% endblock %}
