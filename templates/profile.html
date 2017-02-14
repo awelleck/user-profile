@@ -3,7 +3,6 @@
 {% block profile %}
   <section class="input_section mdl-color--blue-50">
     <h4 class="mdl-typography--text-center">profile.html</h4>
-
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         {% for message in messages %}
@@ -11,7 +10,6 @@
         {% endfor %}
       {% endif %}
     {% endwith %}
-
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp pad">
       <thread>
         <tr>

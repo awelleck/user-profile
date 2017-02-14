@@ -6,7 +6,6 @@
 
     <!-- Textfield with Floating Label -->
     <form method="POST" action="/">
-
       {% if form.errors %}
         <div class="errors pad">
           {% for field in form.errors %}
@@ -16,7 +15,6 @@
           {% endfor %}
         </div>
       {% endif %}
-
       <p class=pad>{{ warn }}</p>
 
       <div class="row pad">

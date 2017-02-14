@@ -27,9 +27,15 @@
 
 ul {
   list-style-type: none;
-  margin-left: 2em;
 }
 
 .pad_send {
   margin-left: 2em;
+}
+
+.scroll {
+  background-color: #E3F2FD;
+  width: 400px;
+  height: 200px;
+  overflow: scroll;
 }
