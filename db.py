@@ -51,6 +51,7 @@ class User(db.Model):
                                                     self.first_name,
                                                     self.last_name)
 
+
 class Chat(db.Model):
     __tablename__ = 'chat'
 
