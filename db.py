@@ -50,3 +50,21 @@ class User(db.Model):
                                                     self.email,
                                                     self.first_name,
                                                     self.last_name)
+
+class Chat(db.Model):
+    __tablename__ = 'chat'
+
+    id = db.Column(db.Integer, primary_key=True)
+    messages = db.Column(db.String(500))
+    timestamp = db.Column(db.DateTime)
+
+    def insert(message):
+        db.session.add(message)
+        db.session.commit()
+
+    def __init__(self, messages):
+        self.messages = messages
+
+    def __repr__(self):
+        return ('<Chat(messages=%s, timestamp=%s)>') % (self.messages,
+                                                        self.timestamp)

@@ -11,7 +11,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
 from flask_socketio import SocketIO, emit, send
 
-from db import User
+from db import User, Chat
 
 app = Flask(__name__)
 app.secret_key = os.environ['KEY']
@@ -188,14 +188,19 @@ def test():
 
 
 # route for chat
-@app.route('/chat')
+@app.route('/chat', methods=['GET'])
 def chat():
-    return render_template('chat.html')
+    if request.method == 'GET':
+        messages = Chat.query.all()
+    return render_template('chat.html', messages=messages)
 
 
 @socketio.on('message')
 def test_message(msg):
     print(msg)
+
+    messages = Chat(messages=msg)
+    Chat.insert(messages)
     send(msg, broadcast=True)
 
 
