@@ -56,6 +56,7 @@ class Chat(db.Model):
     __tablename__ = 'chat'
 
     id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80))
     messages = db.Column(db.String(500))
     timestamp = db.Column(db.DateTime)
 
