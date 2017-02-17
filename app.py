@@ -191,16 +191,21 @@ def test():
 @app.route('/chat', methods=['GET'])
 def chat():
     if request.method == 'GET':
-        messages = Chat.query.all()
-    return render_template('chat.html', messages=messages)
+        history = Chat.query.all()
+    return render_template('chat.html', messages=history)
 
 
 @socketio.on('message')
 def test_message(msg):
     print(msg)
+    try:
+        current_user = session['username']
+    except KeyError:
+        current_user = 'anonymous'
 
-    messages = Chat(messages=msg)
-    Chat.insert(messages)
+    messages = msg
+    submit_db = Chat(current_user, messages)
+    Chat.insert(submit_db)
     send(msg, broadcast=True)
 
 

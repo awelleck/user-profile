@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 
@@ -58,15 +59,20 @@ class Chat(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80))
     messages = db.Column(db.String(500))
-    timestamp = db.Column(db.DateTime)
+    msg_timestamp = db.Column(db.DateTime)
 
-    def insert(message):
-        db.session.add(message)
+    def insert(submit_db):
+        db.session.add(submit_db)
         db.session.commit()
 
-    def __init__(self, messages):
+    def __init__(self, username, messages, msg_timestamp=None):
+        self.username = username
         self.messages = messages
+        if msg_timestamp is None:
+            msg_timestamp = datetime.utcnow()
+        self.msg_timestamp = msg_timestamp
 
     def __repr__(self):
-        return ('<Chat(messages=%s, timestamp=%s)>') % (self.messages,
-                                                        self.timestamp)
+        return ('<Chat(username=%s, messages=%s)>') % (self.username,
+                                                       self.messages,
+                                                       self.msg_timestamp)
