@@ -8,7 +8,7 @@
 }
 
 .pad_top {
-  margin-top: 1em;
+  margin-top: 1.5em;
 }
 
 .download a {
@@ -38,4 +38,11 @@ ul {
   width: 400px;
   height: 200px;
   overflow: scroll;
+}
+
+.border {
+  border-style: groove;
+  width: 35em;
+  height: 22em;
+  margin-left: 5em;
 }
