@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS entries;
+DROP SEQUENCE IF EXISTS entries_id_seq;
 CREATE SEQUENCE entries_id_seq;
 CREATE TABLE entries (
   id integer PRIMARY KEY DEFAULT nextval('entries_id_seq'),
