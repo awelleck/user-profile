@@ -19,14 +19,25 @@ Setting up virtualenv to use Python 3
 
 To test
 
-* Source username and password for database
+* Source username and password for database as well as the key for Python Flask sessions
 * `python app.py`
-* `curl -X POST -d "{ username: '', password: '' }" localhost:5000/db`
 
 or
+
 * Use http://127.0.0.1:5000/ in browser
 
 To dump/restore PostgreSQL database
 
 * `pg_dump dbname > outfile`
 * `psql dbname < infile`
+
+To create DB tables
+
+* `\i schema.sql` from psql prompt
+
+Granting permissions for DB for both tables
+
+* `GRANT ALL PRIVILEGES ON TABLE entries TO db_user;`
+* `GRANT USAGE ON SEQUENCE entries_id_seq TO db_user;`
+* `GRANT ALL PRIVILEGES ON TABLE chat TO db_user;`
+* `GRANT USAGE ON SEQUENCE chat_id_seq TO db_user;`
