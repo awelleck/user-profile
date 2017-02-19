@@ -192,6 +192,7 @@ def test():
 def chat():
     if request.method == 'GET':
         history = Chat.query.all()
+        print('Printing \'history\': %s' % history)
     return render_template('chat.html', messages=history)
 
 

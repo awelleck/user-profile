@@ -73,6 +73,5 @@ class Chat(db.Model):
         self.msg_timestamp = msg_timestamp
 
     def __repr__(self):
-        return ('<Chat(username=%s, messages=%s)>') % (self.username,
-                                                       self.messages,
-                                                       self.msg_timestamp)
+        return (('<Chat(username=%s, messages=%s, timestamp=%s)>') %
+                (self.username, self.messages, self.msg_timestamp))
