@@ -191,8 +191,12 @@ def test():
 @app.route('/chat', methods=['GET'])
 def chat():
     if request.method == 'GET':
+        timestamp_list = []
         history = Chat.query.all()
-        print('Printing \'history\': %s' % history)
+        for entries in history:
+            x = entries.msg_timestamp
+            timestamp_list.append(x)
+        print('Printing \'timestamp_list\': %s' % timestamp_list)
     return render_template('chat.html', messages=history)
 
 

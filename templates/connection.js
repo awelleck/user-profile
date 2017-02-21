@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	var socket = io.connect('http://' + document.domain + ':' + location.port);
+	var offset = new Date().getTimezoneOffset();
+	console.log(offset);
 
 	socket.on('connect', function() {
 		socket.send('User has connected!');
