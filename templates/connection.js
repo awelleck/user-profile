@@ -1,7 +1,11 @@
 $(document).ready(function() {
 	var socket = io.connect('http://' + document.domain + ':' + location.port);
+
 	var offset = new Date().getTimezoneOffset();
-	console.log(offset);
+	var second = '{{ second }}';
+	console.log('Offset in minutes: ' + offset);
+	hours = offset / 60
+	console.log('Offest in hours: ' + hours)
 
 	socket.on('connect', function() {
 		socket.send('User has connected!');

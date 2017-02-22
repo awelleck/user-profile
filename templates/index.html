@@ -10,7 +10,7 @@
         <div class="errors pad">
           {% for field in form.errors %}
           {% for error in form.errors[field] %}
-          <p>{{field}}: {{ error }}</p>
+          <p>{{ error }}</p>
           {% endfor %}
           {% endfor %}
         </div>

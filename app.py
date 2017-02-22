@@ -21,23 +21,20 @@ socketio = SocketIO(app)
 
 
 class LoginForm(Form):
-    username = StringField('Username',
-                           [validators.Length(min=2, max=20)])
-    password = PasswordField('New Password',
-                             [validators.Length(min=8, max=20)])
+    username = StringField('Username', [validators.Length(min=2, max=20,
+                           message='Username is invalid!')])
+    password = PasswordField('New Password', [validators.Length(min=8, max=20,
+                             message='Password is invalid!')])
 
 
 class RegistrationForm(Form):
-    username = StringField('Username',
-                           [validators.Length(min=2, max=20)])
-    password = PasswordField('New Password',
-                             [validators.Length(min=8, max=20)])
-    email = StringField('Email Address',
-                        [validators.Length(min=6, max=35)])
-    first_name = StringField('First Name',
-                             [validators.Length(min=2, max=35)])
-    last_name = StringField('Last Name',
-                            [validators.Length(min=2, max=35)])
+    username = StringField('Username', [validators.Length(min=2, max=20)])
+    password = PasswordField('New Password', [validators.Length(min=8,
+                             max=20)])
+    email = StringField('Email Address', [validators.Length(min=6, max=35),
+                        validators.Email('Enter a vaild email!')])
+    first_name = StringField('First Name', [validators.Length(min=2, max=35)])
+    last_name = StringField('Last Name', [validators.Length(min=2, max=35)])
 
 
 def hash_password(password):
@@ -197,7 +194,9 @@ def chat():
             x = entries.msg_timestamp
             timestamp_list.append(x)
         print('Printing \'timestamp_list\': %s' % timestamp_list)
-    return render_template('chat.html', messages=history)
+        tmp = Chat.query.filter_by(id=2).first()
+        second = tmp.msg_timestamp
+    return render_template('chat.html', messages=history, second=second)
 
 
 @socketio.on('message')
