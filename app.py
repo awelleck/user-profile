@@ -5,36 +5,19 @@ import os
 from flask import Flask, render_template, request, session, redirect, \
     url_for, flash
 from flask_api import status
-from wtforms import Form, StringField, PasswordField, validators
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
 from flask_socketio import SocketIO, emit, send
 
 from db import User, Chat
+from validate import LoginForm, RegistrationForm
 
 app = Flask(__name__)
 app.secret_key = os.environ['KEY']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 socketio = SocketIO(app)
-
-
-class LoginForm(Form):
-    username = StringField('Username', [validators.Length(min=2, max=20,
-                           message='Username is invalid!')])
-    password = PasswordField('New Password', [validators.Length(min=8, max=20,
-                             message='Password is invalid!')])
-
-
-class RegistrationForm(Form):
-    username = StringField('Username', [validators.Length(min=2, max=20)])
-    password = PasswordField('New Password', [validators.Length(min=8,
-                             max=20)])
-    email = StringField('Email Address', [validators.Length(min=6, max=35),
-                        validators.Email('Enter a vaild email!')])
-    first_name = StringField('First Name', [validators.Length(min=2, max=35)])
-    last_name = StringField('Last Name', [validators.Length(min=2, max=35)])
 
 
 def hash_password(password):
