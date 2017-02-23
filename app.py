@@ -155,6 +155,13 @@ def logout():
     return redirect(url_for('index'))
 
 
+# login route
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm(request.form)
+    return render_template('login.html', form=form)
+
+
 # route for testing only
 @app.route('/test')
 def test():
