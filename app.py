@@ -8,7 +8,7 @@ from flask_api import status
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
-from flask_socketio import SocketIO, emit, send
+from flask_socketio import SocketIO, send
 
 from db import User, Chat
 from validate import LoginForm, RegistrationForm
@@ -72,8 +72,6 @@ def index():
             flash('You are logged in!')
             return redirect(url_for('profile', username=username))
 
-        return render_template('index.html',
-                               form=form), status.HTTP_201_CREATED
     return render_template('index.html', form=form)
 
 
@@ -101,6 +99,7 @@ def register():
             str_e = str(e)
             user_exept = 'entries_username_key'
             email_exept = 'entries_email_key'
+
             if user_exept in str_e:
                 warn = 'Username \'' + username + '\' is already taken!'
                 User.rollback()
@@ -116,6 +115,7 @@ def register():
                 print(str_e)
                 return (render_template('register.html', form=form, warn=warn),
                         status.HTTP_500_INTERNAL_SERVER_ERROR)
+
     return render_template('register.html', form=form)
 
 
