@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block title %}Login{% endblock %}
+{% block login %}
+  <section class="input_section mdl-color--blue-50">
+    <h4 class="mdl-typography--text-center">login.html</h4>
+
+    <!-- Textfield with Floating Label -->
+    <form method="POST" action="/">
+      {% if form.errors %}
+        <div class="errors pad">
+          {% for field in form.errors %}
+          {% for error in form.errors[field] %}
+          <p>{{ error }}</p>
+          {% endfor %}
+          {% endfor %}
+        </div>
+      {% endif %}
+      <p class=pad>{{ warn }}</p>
+
+      <div class="pad">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          {{ form.username(class_="mdl-textfield__input") }}
+          <label class="mdl-textfield__label">username</label>
+        </div>
+      </div>
+
+      <div class="pad">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          {{ form.password(class_="mdl-textfield__input") }}
+          <label class="mdl-textfield__label">password</label>
+        </div>
+      </div>
+
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad" type="submit">
+        Login
+      </button>
+    </form>
+
+    <a href="{{ url_for('register') }}"><button class="mdl-button mdl-js-button mdl-button--raised  mdl-button--colored pad pad_top">
+      Register
+    </button></a>
+  </section>
+{% endblock %}
