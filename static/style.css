@@ -8,6 +8,8 @@ body { background-color: #303030; } /*slate grey*/
 .download { padding-top: 1em; padding-bottom: 1em; }
 .input_section { padding-top: 1em; padding-bottom: 10em; }
 .pad_send { margin-left: 2em; }
+.icons-top { margin-top: 1em; padding-left: 60px; }
+.icons-ext { margin-top: 1.6em; padding-left: 60px; }
 
 .material-icons.grey300 { color: #E0E0E0; } /*light grey*/
 .mdl-textfield__input { border-bottom: 1px solid #E0E0E0; color: #E0E0E0; } /*light grey*/
