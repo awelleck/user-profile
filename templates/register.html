@@ -15,38 +15,43 @@
     <p class=pad>{{ warn }}</p>
 
     <form method="POST" action="/register">
-      <div class="row pad">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          {{ form.username(class_="mdl-textfield__input") }}
-          <label class="mdl-textfield__label">username</label>
+      <div class="pad">
+        <i class="material-icons grey300" id="mood">mood</i>
+        <div class="mdl-textfield mdl-js-textfield">
+          {{ form.username(class="mdl-textfield__input", type="text", id="username") }}
+          <label class="mdl-textfield__label" for="username">username</label>
         </div>
       </div>
 
-      <div class="row pad">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          {{ form.password(class_="mdl-textfield__input") }}
-          <label class="mdl-textfield__label">password</label>
+      <div class="pad">
+        <i class="material-icons grey300" id="lock">lock</i>
+        <div class="mdl-textfield mdl-js-textfield">
+          {{ form.password(class="mdl-textfield__input", type="text", id="password") }}
+          <label class="mdl-textfield__label" for="password">password</label>
         </div>
       </div>
 
-      <div class="row pad">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          {{ form.email(class_="mdl-textfield__input") }}
-          <label class="mdl-textfield__label">email</label>
+      <div class="pad">
+        <i class="material-icons grey300" id="mail">mail</i>
+        <div class="mdl-textfield mdl-js-textfield">
+          {{ form.email(class="mdl-textfield__input", type="text", id="email") }}
+          <label class="mdl-textfield__label" for="email">email</label>
         </div>
       </div>
 
-      <div class="row pad">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          {{ form.first_name(class_="mdl-textfield__input") }}
-          <label class="mdl-textfield__label">first name</label>
+      <div class="pad">
+        <i class="material-icons grey300" id="account_circle">account_circle</i>
+        <div class="mdl-textfield mdl-js-textfield">
+          {{ form.first_name(class="mdl-textfield__input", type="text", id="first_name") }}
+          <label class="mdl-textfield__label" for="first_name">first name</label>
         </div>
       </div>
 
-      <div class="row pad">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          {{ form.last_name(class_="mdl-textfield__input") }}
-          <label class="mdl-textfield__label">last name</label>
+      <div class="pad">
+        <i class="material-icons grey300" id="account_box">account_box</i>
+        <div class="mdl-textfield mdl-js-textfield">
+          {{ form.last_name(class="mdl-textfield__input", type="text", id="last_name") }}
+          <label class="mdl-textfield__label" for="last_name">last name</label>
         </div>
       </div>
 
