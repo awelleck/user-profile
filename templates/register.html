@@ -1,63 +1,61 @@
 {% extends "layout.html" %}
 {% block title %}Register{% endblock %}
+{% block custom %}
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+{% include "custom.js" %}
+</script>
+{% endblock %}
 {% block register %}
-  <section class="input_section mdl-color--blue-50">
-    <h4 class="mdl-typography--text-center">register.html</h4>
-    {% if form.errors %}
-      <div class="errors pad">
-        {% for field in form.errors %}
-        {% for error in form.errors[field] %}
-        <p>{{ error }}</p>
-        {% endfor %}
-        {% endfor %}
+  <h4 class="mdl-typography--text-center">register.html</h4>
+  {% if form.errors %}
+    <div class="errors pad">
+      {% for field in form.errors %}
+      {% for error in form.errors[field] %}
+      <p>{{ error }}</p>
+      {% endfor %}
+      {% endfor %}
+    </div>
+  {% endif %}
+  <p class=pad>{{ warn }}</p>
+  <form method="POST" action="/register">
+    <div class="pad">
+      <i class="material-icons grey300" id="mood">mood</i>
+      <div class="mdl-textfield mdl-js-textfield">
+        {{ form.username(class="mdl-textfield__input", type="text", id="username") }}
+        <label class="mdl-textfield__label" for="username">username</label>
       </div>
-    {% endif %}
-    <p class=pad>{{ warn }}</p>
-
-    <form method="POST" action="/register">
-      <div class="pad">
-        <i class="material-icons grey300" id="mood">mood</i>
-        <div class="mdl-textfield mdl-js-textfield">
-          {{ form.username(class="mdl-textfield__input", type="text", id="username") }}
-          <label class="mdl-textfield__label" for="username">username</label>
-        </div>
+    </div>
+    <div class="pad">
+      <i class="material-icons grey300" id="lock">lock</i>
+      <div class="mdl-textfield mdl-js-textfield">
+        {{ form.password(class="mdl-textfield__input", type="text", id="password") }}
+        <label class="mdl-textfield__label" for="password">password</label>
       </div>
-
-      <div class="pad">
-        <i class="material-icons grey300" id="lock">lock</i>
-        <div class="mdl-textfield mdl-js-textfield">
-          {{ form.password(class="mdl-textfield__input", type="text", id="password") }}
-          <label class="mdl-textfield__label" for="password">password</label>
-        </div>
+    </div>
+    <div class="pad">
+      <i class="material-icons grey300" id="mail">mail</i>
+      <div class="mdl-textfield mdl-js-textfield">
+        {{ form.email(class="mdl-textfield__input", type="text", id="email") }}
+        <label class="mdl-textfield__label" for="email">email</label>
       </div>
-
-      <div class="pad">
-        <i class="material-icons grey300" id="mail">mail</i>
-        <div class="mdl-textfield mdl-js-textfield">
-          {{ form.email(class="mdl-textfield__input", type="text", id="email") }}
-          <label class="mdl-textfield__label" for="email">email</label>
-        </div>
+    </div>
+    <div class="pad">
+      <i class="material-icons grey300" id="account_circle">account_circle</i>
+      <div class="mdl-textfield mdl-js-textfield">
+        {{ form.first_name(class="mdl-textfield__input", type="text", id="first_name") }}
+        <label class="mdl-textfield__label" for="first_name">first name</label>
       </div>
-
-      <div class="pad">
-        <i class="material-icons grey300" id="account_circle">account_circle</i>
-        <div class="mdl-textfield mdl-js-textfield">
-          {{ form.first_name(class="mdl-textfield__input", type="text", id="first_name") }}
-          <label class="mdl-textfield__label" for="first_name">first name</label>
-        </div>
+    </div>
+    <div class="pad">
+      <i class="material-icons grey300" id="account_box">account_box</i>
+      <div class="mdl-textfield mdl-js-textfield">
+        {{ form.last_name(class="mdl-textfield__input", type="text", id="last_name") }}
+        <label class="mdl-textfield__label" for="last_name">last name</label>
       </div>
-
-      <div class="pad">
-        <i class="material-icons grey300" id="account_box">account_box</i>
-        <div class="mdl-textfield mdl-js-textfield">
-          {{ form.last_name(class="mdl-textfield__input", type="text", id="last_name") }}
-          <label class="mdl-textfield__label" for="last_name">last name</label>
-        </div>
-      </div>
-
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad" type="submit">
-        Submit
-      </button>
-    </form>
-  </section>
+    </div>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad" type="submit">
+      Submit
+    </button>
+  </form>
 {% endblock %}
