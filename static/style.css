@@ -3,12 +3,13 @@ body { background-color: #303030; } /*slate grey*/
 
 .pad { margin-left: 5em; }
 .pad-top { margin-top: 1.5em; }
-/* .readme a { text-decoration: none; } */
+.readme a { text-decoration: none; }
 .readme { padding-top: 1em; padding-bottom: 1em; }
 .input-section { padding-top: 1em; padding-bottom: 10em; }
 .send { margin-left: 2em; }
 .icons-top { margin-top: 1em; padding-left: 60px; }
 .icons-ext { margin-top: 1.6em; padding-left: 60px; }
+.errors { color: #E0E0E0; }
 
 .material-icons.grey300 { color: #E0E0E0; } /*light grey*/
 .mdl-textfield__input { border-bottom: 1px solid #E0E0E0; color: #E0E0E0; } /*light grey*/

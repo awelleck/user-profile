@@ -1,3 +1,7 @@
+/**
+ * JS for mdl-textfield icons
+ * Andrew Welleck
+ */
 $(document).ready(function(){
   $("#username").focus(function(){
     $("#mood").css("color", "#2196F3"); //vivid blue
