@@ -1,13 +1,12 @@
 ul { list-style-type: none; }
 body { background-color: #303030; } /*slate grey*/
 
-.centered { text-align: center; font-size: 200%; }
 .pad { margin-left: 5em; }
-.pad_top { margin-top: 1.5em; }
-.download a { text-decoration: none; }
-.download { padding-top: 1em; padding-bottom: 1em; }
-.input_section { padding-top: 1em; padding-bottom: 10em; }
-.pad_send { margin-left: 2em; }
+.pad-top { margin-top: 1.5em; }
+/* .readme a { text-decoration: none; } */
+.readme { padding-top: 1em; padding-bottom: 1em; }
+.input-section { padding-top: 1em; padding-bottom: 10em; }
+.send { margin-left: 2em; }
 .icons-top { margin-top: 1em; padding-left: 60px; }
 .icons-ext { margin-top: 1.6em; padding-left: 60px; }
 

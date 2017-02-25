@@ -9,11 +9,11 @@
 </script>
 {% endblock %}
 {% block chat %}
-<section class="input_section mdl-color--blue-50">
+<section class="input-section mdl-color--blue-50">
   <h4 class="mdl-typography--text-center">chat.html</h4>
 
   <div class="border">
-  <div class="scroll pad pad_top">
+  <div class="scroll pad pad-top">
     <ul id="messages">
       {% for msg in messages %}
         <li>{{ msg.messages }}</li>
@@ -26,7 +26,7 @@
       <input class="mdl-textfield__input" type="text" id="input">
       <label class="mdl-textfield__label" for="sample1">send</label>
     </div>
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad_send" type="submit" id="submit">
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored send" type="submit" id="submit">
       Send
     </button>
   </form>
