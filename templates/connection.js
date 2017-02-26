@@ -1,3 +1,7 @@
+/**
+ * JS for Flask-SocketIO and chat
+ * Andrew Welleck
+ */
 $(document).ready(function() {
   var socket = io.connect('http://' + document.domain + ':' + location.port);
 

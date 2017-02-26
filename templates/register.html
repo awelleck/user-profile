@@ -9,9 +9,9 @@
 {% endblock %}
 {% block register %}
   <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--5-col">
+    <div class="mdl-cell mdl-cell--4-col">
     {% if form.errors %}
-      <div class="errors pad">
+      <div class="errors pad grey300-text">
         {% for field in form.errors %}
         {% for error in form.errors[field] %}
         <p>{{ error }}</p>
@@ -28,42 +28,47 @@
       <div><i class="material-icons grey300 icons-ext" id="account_circle">account_circle</i></div>
       <div><i class="material-icons grey300 icons-ext" id="account_box">account_box</i></div>
     </div>
-    <div class="mdl-cell mdl-cell--6-col">
-    <form method="POST" action="/register">
-      <div>
-        <div class="mdl-textfield mdl-js-textfield">
-          {{ form.username(class="mdl-textfield__input", type="text", id="username") }}
-          <label class="mdl-textfield__label" for="username">username</label>
+    <div class="mdl-cell mdl-cell--7-col">
+      <form method="POST" action="/register">
+        <div>
+          <div class="mdl-textfield mdl-js-textfield">
+            {{ form.username(class="mdl-textfield__input", type="text", id="username") }}
+            <label class="mdl-textfield__label" for="username">username</label>
+          </div>
         </div>
-      </div>
-      <div>
-        <div class="mdl-textfield mdl-js-textfield">
-          {{ form.password(class="mdl-textfield__input", type="text", id="password") }}
-          <label class="mdl-textfield__label" for="password">password</label>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield">
+            {{ form.password(class="mdl-textfield__input", type="text", id="password") }}
+            <label class="mdl-textfield__label" for="password">password</label>
+          </div>
         </div>
-      </div>
-      <div>
-        <div class="mdl-textfield mdl-js-textfield">
-          {{ form.email(class="mdl-textfield__input", type="text", id="email") }}
-          <label class="mdl-textfield__label" for="email">email</label>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield">
+            {{ form.email(class="mdl-textfield__input", type="text", id="email") }}
+            <label class="mdl-textfield__label" for="email">email</label>
+          </div>
         </div>
-      </div>
-      <div>
-        <div class="mdl-textfield mdl-js-textfield">
-          {{ form.first_name(class="mdl-textfield__input", type="text", id="first_name") }}
-          <label class="mdl-textfield__label" for="first_name">first name</label>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield">
+            {{ form.first_name(class="mdl-textfield__input", type="text", id="first_name") }}
+            <label class="mdl-textfield__label" for="first_name">first name</label>
+          </div>
         </div>
-      </div>
-      <div>
-        <div class="mdl-textfield mdl-js-textfield">
-          {{ form.last_name(class="mdl-textfield__input", type="text", id="last_name") }}
-          <label class="mdl-textfield__label" for="last_name">last name</label>
+        <div>
+          <div class="mdl-textfield mdl-js-textfield">
+            {{ form.last_name(class="mdl-textfield__input", type="text", id="last_name") }}
+            <label class="mdl-textfield__label" for="last_name">last name</label>
+          </div>
         </div>
-      </div>
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">
-        Submit
-      </button>
-    </form>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">
+          Submit
+        </button>
+      </form>
     </div>
+    <div class="mdl-cell mdl-cell--5-col"></div>
+    <div class="mdl-cell mdl-cell--3-col">
+      <p class="grey300-text">Welcome to the registration page. Here you can register for an account. All fields are required and are validated using WTForms.</p>
+    </div>
+    <div class="mdl-cell mdl-cell--4-col"></div>
   </div>
 {% endblock %}
