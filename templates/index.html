@@ -1,9 +1,7 @@
 {% extends "layout.html" %}
 {% block title %}Index{% endblock %}
 {% block index %}
-  <section class="input-section mdl-color--blue-50">
-    <h4 class="mdl-typography--text-center">index.html</h4>
-
+{% block background %}<body background="{{ url_for('static', filename='clouds.jpg') }}">{% endblock %}
     <form method="POST" action="/">
       {% if form.errors %}
         <div class="errors pad">
@@ -38,7 +36,6 @@
     <a href="{{ url_for('register') }}"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad pad-top">
       Register
     </button></a>
-  </section>
 {% endblock %}
 {% block section %}
   <section class="readme mdl-color--grey-800 mdl-typography--text-center">
