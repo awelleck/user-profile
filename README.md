@@ -41,3 +41,8 @@ Granting permissions for DB for both tables
 * `GRANT USAGE ON SEQUENCE entries_id_seq TO db_user;`
 * `GRANT ALL PRIVILEGES ON TABLE chat TO db_user;`
 * `GRANT USAGE ON SEQUENCE chat_id_seq TO db_user;`
+
+My backend stack: [Flask-SQLAlchemy](http://flask-sqlalchemy.pocoo.org/2.1/) using [Psycopg](http://initd.org/psycopg/docs/) driver on top of [PostgreSQL](https://www.postgresql.org/)
+Form validation by [WTForms](http://wtforms.readthedocs.io/en/latest/)
+Front-end framwork by [Material Design Lite](https://getmdl.io/)
+Client/server communication for chat leverages [Flask-Socket IO](https://flask-socketio.readthedocs.io/en/latest/)
