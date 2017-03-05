@@ -159,6 +159,27 @@ def logout():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm(request.form)
+    if request.method == 'POST' and form.validate():
+        username = request.form['username']
+        user_password = request.form['password']
+
+        try:
+            hashed_password = User.query_pwd(username=username).password
+        except AttributeError:
+            warn = 'Username or password was incorrect!'
+            return (render_template('login.html', form=form, warn=warn),
+                    status.HTTP_406_NOT_ACCEPTABLE)
+
+        login = check_password(hashed_password, user_password)
+
+        if login is False:
+            warn = 'Username or password was incorrect!'
+            return (render_template('login.html', form=form, warn=warn),
+                    status.HTTP_406_NOT_ACCEPTABLE)
+        elif login is True:
+            session['username'] = request.form['username']
+            return redirect(url_for('profile', username=username))
+
     return render_template('login.html', form=form)
 
 

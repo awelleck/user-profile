@@ -2,40 +2,40 @@
 {% block title %}Index{% endblock %}
 {% block index %}
 {% block background %}<body background="{{ url_for('static', filename='clouds.jpg') }}">{% endblock %}
-    <form method="POST" action="/">
-      {% if form.errors %}
-        <div class="errors pad">
-          {% for field in form.errors %}
-          {% for error in form.errors[field] %}
-          <p>{{ error }}</p>
-          {% endfor %}
-          {% endfor %}
-        </div>
-      {% endif %}
-      <p class=pad>{{ warn }}</p>
-
-      <div class="pad">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          {{ form.username(class="mdl-textfield__input") }}
-          <label class="mdl-textfield__label">username</label>
-        </div>
+  <form method="POST" action="/">
+    {% if form.errors %}
+      <div class="errors pad">
+        {% for field in form.errors %}
+        {% for error in form.errors[field] %}
+        <p>{{ error }}</p>
+        {% endfor %}
+        {% endfor %}
       </div>
+    {% endif %}
+    <p class=pad>{{ warn }}</p>
 
-      <div class="pad">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          {{ form.password(class="mdl-textfield__input") }}
-          <label class="mdl-textfield__label">password</label>
-        </div>
+    <div class="pad">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        {{ form.username(class="mdl-textfield__input") }}
+        <label class="mdl-textfield__label">username</label>
       </div>
+    </div>
 
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad" type="submit">
-        Login
-      </button>
-    </form>
+    <div class="pad">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        {{ form.password(class="mdl-textfield__input") }}
+        <label class="mdl-textfield__label">password</label>
+      </div>
+    </div>
 
-    <a href="{{ url_for('register') }}"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad pad-top">
-      Register
-    </button></a>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad" type="submit">
+      Login
+    </button>
+  </form>
+
+  <a href="{{ url_for('register') }}"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad pad-top">
+    Register
+  </button></a>
 {% endblock %}
 {% block section %}
   <section class="readme mdl-color--grey-800 mdl-typography--text-center">
