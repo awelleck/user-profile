@@ -19,14 +19,14 @@ body { background-color: #303030; } /*slate grey*/
 
 .scroll {
   background-color: #E3F2FD; /*light grayish blue*/
-  width: 400px;
-  height: 200px;
+  width: 300px;
+  height: 350px;
   overflow: scroll;
 }
 
 .border {
   border-style: groove;
   width: 35em;
-  height: 22em;
+  height: 32em;
   margin-left: 5em;
 }
