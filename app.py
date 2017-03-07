@@ -36,7 +36,7 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if any(session) is False:
-            return redirect(url_for('index', next=request.url))
+            return redirect(url_for('login', next=request.url))
         return f(*args, **kwargs)
 
     return decorated_function
@@ -197,6 +197,7 @@ def test():
 
 # route for chat
 @app.route('/chat', methods=['GET'])
+@login_required
 def chat():
     if request.method == 'GET':
         timestamp_list = []
@@ -204,7 +205,7 @@ def chat():
         for entries in history:
             x = entries.msg_timestamp
             timestamp_list.append(x)
-        print('Printing \'timestamp_list\': %s' % timestamp_list)
+        #print('Printing \'timestamp_list\': %s' % timestamp_list)
         tmp = Chat.query.filter_by(id=2).first()
         second = tmp.msg_timestamp
     return render_template('chat.html', messages=history, second=second)

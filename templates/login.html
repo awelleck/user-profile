@@ -1,43 +1,46 @@
 {% extends "layout.html" %}
 {% block title %}Login{% endblock %}
 {% block login %}
-  <section class="input-section mdl-color--blue-50">
-    <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--4-col"></div>
+  <section class="input-section mdl-color--blue-50 center">
+    <form method="POST" action="/login">
+      {% if form.errors %}
+        <div class="errors pad">
+          {% for field in form.errors %}
+          {% for error in form.errors[field] %}
+          <p>{{ error }}</p>
+          {% endfor %}
+          {% endfor %}
+        </div>
+      {% endif %}
+      <p class=pad>{{ warn }}</p>
+      <div class="mdl-grid">
+      <div class="mdl-layout-spacer"></div>
       <div class="mdl-cell mdl-cell--4-col">
-        <form method="POST" action="/login">
-          {% if form.errors %}
-            <div class="errors pad">
-              {% for field in form.errors %}
-              {% for error in form.errors[field] %}
-              <p>{{ error }}</p>
-              {% endfor %}
-              {% endfor %}
-            </div>
-          {% endif %}
-          <p class=pad>{{ warn }}</p>
-
-          <div class="pad">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              {{ form.username(class="mdl-textfield__input") }}
-              <label class="mdl-textfield__label">username</label>
-            </div>
-          </div>
-          <div class="pad">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              {{ form.password(class="mdl-textfield__input") }}
-              <label class="mdl-textfield__label">password</label>
-            </div>
-          </div>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad" type="submit">
-            Login
-          </button>
-        </form>
-        <a href="{{ url_for('register') }}"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad pad-top">
-          Register
-        </button></a>
+      <div class="card-wide mdl-card mdl-shadow--6dp">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          {{ form.username(class="mdl-textfield__input") }}
+          <label class="mdl-textfield__label">username</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          {{ form.password(class="mdl-textfield__input") }}
+          <label class="mdl-textfield__label">password</label>
+        </div>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">
+          Login
+        </button>
       </div>
-      <div class="mdl-cell mdl-cell--4-col"></div>
+      </div>
+      <div class="mdl-layout-spacer"></div>
+      </div>
+    </form>
+    <div class="mdl-grid">
+    <div class="mdl-layout-spacer"></div>
+    <div class="mdl-cell mdl-cell--4-col">
+    <a href="{{ url_for('register') }}"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad-top">
+      Register
+    </button></a>
+    </div>
+    <div class="mdl-layout-spacer"></div>
     </div>
   </section>
 {% endblock %}

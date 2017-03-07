@@ -11,22 +11,13 @@ body { background-color: #303030; } /*slate grey*/
 .icons-ext { margin-top: 1.6em; padding-left: 60px; }
 .grey300-text { color: #E0E0E0; }
 .welcome { margin-left: 4.5em; margin-top: 3em; }
+.border { border-style: groove; width: 35em; height: 32em; margin-left: 5em; }
+.center { justify-content: center; }
 
 .material-icons.grey300 { color: #E0E0E0; } /*light grey*/
 .mdl-textfield__input { border-bottom: 1px solid #E0E0E0; color: #E0E0E0; } /*light grey*/
 .mdl-textfield__label { color: #9E9E9E; } /*dark grey*/
 .mdl-grid.center-items { justify-content: center; }
+.card-wide.mdl-card { width: 512px; background: #303030; align-items: center; justify-content: center; }
 
-.scroll {
-  background-color: #E3F2FD; /*light grayish blue*/
-  width: 300px;
-  height: 350px;
-  overflow: scroll;
-}
-
-.border {
-  border-style: groove;
-  width: 35em;
-  height: 32em;
-  margin-left: 5em;
-}
+.scroll { background-color: #E3F2FD; /*light grayish blue*/ width: 300px; height: 350px; overflow: scroll; }
