@@ -2,6 +2,7 @@
 {% block title %}Index{% endblock %}
 {% block index %}
 {% block background %}<body background="{{ url_for('static', filename='clouds.jpg') }}">{% endblock %}
+  <h1>Welcome!</h1>
   <form method="POST" action="/">
     {% if form.errors %}
       <div class="errors pad">
@@ -28,24 +29,37 @@
       </div>
     </div>
 
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad" type="submit">
+    <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad" type="submit">
       Login
-    </button>
+    </a>
   </form>
 
-  <a href="{{ url_for('register') }}"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad pad-top">
+  <a href="{{ url_for('register') }}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad pad-top">
     Register
-  </button></a>
-{% endblock %}
-{% block section %}
+  </a>
+
+  <button class="mdl-button mdl-js-button mdl-button--fab arrow" id="arrow">
+    <i class="material-icons">keyboard_arrow_down</i>
+  </button>
+
+  <section class="light">
+  <div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--4-col"></div>
+  <div class="mdl-cell mdl-cell--4-col">
+    <p>Welcome to the index!</p>
+  </section>
+
   <section class="readme mdl-color--grey-800 mdl-typography--text-center">
     <a href="#" class="mdl-color-text--grey-50">readme</a>
   </section>
-{% endblock %}
-{% block footer %}
-  <footer class="mdl-mini-footer mdl-color--grey-900">
+
+  <footer class="mdl-mini-footer mdl-color--grey-900" id="hello">
     <div class="mdl-mini-footer__right-section">
       <p>&copy; 2017 Andrew Welleck</p>
     </div>
   </footer>
+
+  </div>
+  <div class="mdl-cell mdl-cell--4-col"></div>
+  </div>
 {% endblock %}
