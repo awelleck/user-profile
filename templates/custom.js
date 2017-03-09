@@ -34,3 +34,11 @@ $(document).ready(function(){
     $("#account_box").css("color", "#E0E0E0");
   });
 });
+
+$(function(){
+  $("#arrow").click(function(){
+    $(".mdl-layout__content").animate({
+      scrollTop: $("#light").offset().top},
+      "slow");
+  });
+});

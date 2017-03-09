@@ -1,65 +1,74 @@
 {% extends "layout.html" %}
 {% block title %}Index{% endblock %}
+{% block custom %}
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+{% include "custom.js" %}
+</script>
+{% endblock %}
 {% block index %}
 {% block background %}<body background="{{ url_for('static', filename='clouds.jpg') }}">{% endblock %}
   <h1>Welcome!</h1>
-  <form method="POST" action="/">
-    {% if form.errors %}
-      <div class="errors pad">
-        {% for field in form.errors %}
-        {% for error in form.errors[field] %}
-        <p>{{ error }}</p>
-        {% endfor %}
-        {% endfor %}
-      </div>
-    {% endif %}
-    <p class=pad>{{ warn }}</p>
+  <div class="mdl-center picture">
+    <form method="POST" action="/">
+      {% if form.errors %}
+        <div class="errors pad">
+          {% for field in form.errors %}
+          {% for error in form.errors[field] %}
+          <p>{{ error }}</p>
+          {% endfor %}
+          {% endfor %}
+        </div>
+      {% endif %}
+      <p class=pad>{{ warn }}</p>
 
-    <div class="pad">
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        {{ form.username(class="mdl-textfield__input") }}
-        <label class="mdl-textfield__label">username</label>
+      <div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          {{ form.username(class="mdl-textfield__input") }}
+          <label class="mdl-textfield__label">username</label>
+        </div>
       </div>
-    </div>
-
-    <div class="pad">
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        {{ form.password(class="mdl-textfield__input") }}
-        <label class="mdl-textfield__label">password</label>
+      <div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          {{ form.password(class="mdl-textfield__input") }}
+          <label class="mdl-textfield__label">password</label>
+        </div>
       </div>
-    </div>
 
-    <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad" type="submit">
-      Login
+      <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">
+        Login
+      </a>
+    </form>
+
+    <a href="{{ url_for('register') }}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad-top">
+      Register
     </a>
-  </form>
+  </div>
 
-  <a href="{{ url_for('register') }}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad pad-top">
-    Register
-  </a>
+  <div class="mdl-center">
+    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-center" id="arrow">
+      <i class="material-icons">expand_more</i>
+    </button>
+  </div>
 
-  <button class="mdl-button mdl-js-button mdl-button--fab arrow" id="arrow">
-    <i class="material-icons">keyboard_arrow_down</i>
-  </button>
+  <div class="light" id="light">
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--4-col"></div>
+      <div class="mdl-cell mdl-cell--4-col">
+        <p>Welcome to the index! User profile system with authentication: Web framework: Flask, Backend framework: Flask-SQLAlchemy using Psycopg2 driver to connect to PostgreSQL relational database, Form validation by WTForms, Front-end framwork by Material Design Lite, Client/server communication for chat leverages Flask-Socket IO and Eventlet</p>
+      </div>
+      <div class="mdl-cell mdl-cell--4-col"></div>
+    </div>
+  </div>
 
-  <section class="light">
-  <div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--4-col"></div>
-  <div class="mdl-cell mdl-cell--4-col">
-    <p>Welcome to the index!</p>
-  </section>
-
-  <section class="readme mdl-color--grey-800 mdl-typography--text-center">
+  <div class="readme mdl-color--grey-800 mdl-typography--text-center">
     <a href="#" class="mdl-color-text--grey-50">readme</a>
-  </section>
+  </div>
 
   <footer class="mdl-mini-footer mdl-color--grey-900" id="hello">
     <div class="mdl-mini-footer__right-section">
       <p>&copy; 2017 Andrew Welleck</p>
     </div>
   </footer>
-
-  </div>
-  <div class="mdl-cell mdl-cell--4-col"></div>
-  </div>
 {% endblock %}

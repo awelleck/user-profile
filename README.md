@@ -4,7 +4,7 @@
 User profile system with authentication:
 
 * Web framework: [Flask](http://flask.pocoo.org/)
-* Backend framework: [Flask-SQLAlchemy](http://flask-sqlalchemy.pocoo.org/2.1/) using [Psycopg2](http://initd.org/psycopg/docs/) driver to connecto to [PostgreSQL](https://www.postgresql.org/) relational database
+* Backend framework: [Flask-SQLAlchemy](http://flask-sqlalchemy.pocoo.org/2.1/) using [Psycopg2](http://initd.org/psycopg/docs/) driver to connect to [PostgreSQL](https://www.postgresql.org/) relational database
 * Form validation by [WTForms](http://wtforms.readthedocs.io/en/latest/)
 * Front-end framwork by [Material Design Lite](https://getmdl.io/)
 * Client/server communication for chat leverages [Flask-Socket IO](https://flask-socketio.readthedocs.io/en/latest/) and [Eventlet](http://eventlet.net/)

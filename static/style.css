@@ -14,7 +14,9 @@ h1 { font-size: 2em; color: #fff; font-weight: 100; text-align: center;  }
 .welcome { margin-left: 4.5em; margin-top: 3em; }
 .border { border-style: groove; width: 35em; height: 32em; margin-left: 5em; }
 .center { justify-content: center; }
-.light { margin-top: 40em; background-color: #fff; align-items: center; justify-content: center; }
+.light { width: 100%; height: 300px; background-color: #fff; align-items: center; justify-content: center; }
+.mdl-center { text-align: center; }
+.picture { width: 100%; height: 500px; }
 
 .material-icons.grey300 { color: #E0E0E0; } /*light grey*/
 .mdl-textfield__input { border-bottom: 1px solid #E0E0E0; color: #E0E0E0; } /*light grey*/
