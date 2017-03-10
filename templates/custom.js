@@ -1,5 +1,5 @@
 /**
- * JS for mdl-textfield icons
+ * JS for mdl-textfield icons, scroll-down arrow
  * Andrew Welleck
  */
 $(document).ready(function(){

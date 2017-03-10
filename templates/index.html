@@ -22,7 +22,6 @@
         </div>
       {% endif %}
       <p class=pad>{{ warn }}</p>
-
       <div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           {{ form.username(class="mdl-textfield__input") }}
@@ -35,14 +34,13 @@
           <label class="mdl-textfield__label">password</label>
         </div>
       </div>
-
-      <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">
-        Login
-      </a>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">
+        login
+      </button>
     </form>
 
     <a href="{{ url_for('register') }}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad-top">
-      Register
+      register
     </a>
   </div>
 

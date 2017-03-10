@@ -1,6 +1,6 @@
 ul { list-style-type: none; }
 body { background-color: #303030; } /*slate grey*/
-h1 { font-size: 2em; color: #fff; font-weight: 100; text-align: center;  }
+h1 { font-size: 2em; color: #fff; font-weight: 100; text-align: center; }
 
 .pad { margin-left: 5em; }
 .pad-top { margin-top: 1.5em; }
@@ -22,7 +22,7 @@ h1 { font-size: 2em; color: #fff; font-weight: 100; text-align: center;  }
 .mdl-textfield__input { border-bottom: 1px solid #E0E0E0; color: #E0E0E0; } /*light grey*/
 .mdl-textfield__label { color: #9E9E9E; } /*dark grey*/
 .mdl-grid.center-items { justify-content: center; }
-.mdl-button--raised { min-width: 180px; margin: 10px;}
+.mdl-button--raised { min-width: 180px; margin: 10px; }
 .card-wide.mdl-card { width: 512px; background: #303030; align-items: center; justify-content: center; }
 
 .scroll { background-color: #E3F2FD; /*light grayish blue*/ width: 300px; height: 350px; overflow: scroll; }
