@@ -14,16 +14,16 @@
     <div class="mdl-cell mdl-cell--6-col">
       <div class="border">
         <div class="scroll pad pad-top">
-          <ul id="messages">
-            {% for msg in messages %}
-              <li>{{ msg.messages }}</li>
+          <div id="log">
+            {% for username, messages, msg_timestamp in history %}
+            <div>{{ username }} | {{ messages }} | {{ msg_timestamp }}</div>
             {% endfor %}
-          </ul>
+          </div>
         </div>
 
-        <form class="pad" action="#">
+        <form id="emit" method="POST" action="#" class="pad">
           <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" id="input">
+            <input class="mdl-textfield__input" type="text" id="emit_data">
             <label class="mdl-textfield__label" for="sample1">send</label>
           </div>
           <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored send" type="submit" id="submit">
@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="mdl-cell mdl-cell--4-col">
-      <p class="welcome">Welcome to chat! The client/server communication for chat leverages Flask-Socket IO and Eventlet. If you are logged in, your username, and the timestamp of your message will be saved in PostgreSQL DB.</p>
+      <p class="welcome">Welcome to chat! The client/server communication for chat leverages Flask-Socket IO and Eventlet. If you are logged in, your username, and the timestamp of your message will be saved in the PostgreSQL DB.</p>
     </div><div class="mdl-cell mdl-cell--2-col"></div>
   </div>
 </section>

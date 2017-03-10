@@ -8,7 +8,7 @@ from flask_api import status
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
-from flask_socketio import SocketIO, send
+from flask_socketio import SocketIO, Namespace, send, emit, disconnect
 
 from db import User, Chat
 from validate import LoginForm, RegistrationForm
@@ -196,33 +196,38 @@ def test():
 
 
 # route for chat
-@app.route('/chat', methods=['GET'])
+@app.route('/chat', methods=['GET', 'POST'])
 @login_required
 def chat():
     if request.method == 'GET':
-        timestamp_list = []
+        history_list = []
         history = Chat.query.all()
         for entries in history:
-            x = entries.msg_timestamp
-            timestamp_list.append(x)
-        #print('Printing \'timestamp_list\': %s' % timestamp_list)
-        tmp = Chat.query.filter_by(id=2).first()
-        second = tmp.msg_timestamp
-    return render_template('chat.html', messages=history, second=second)
+            history_list.append((entries.username, entries.messages,
+                                 entries.msg_timestamp))
+        return render_template('chat.html', history=history_list)
 
 
-@socketio.on('message')
-def test_message(msg):
-    print(msg)
+@socketio.on('my_event', namespace='/chat')
+def test_message(message):
+    emit('my_response', {'data': message['data']})
     try:
         current_user = session['username']
     except KeyError:
         current_user = 'anonymous'
-
-    messages = msg
-    submit_db = Chat(current_user, messages)
+    submit_db = Chat(current_user, message['data'])
     Chat.insert(submit_db)
-    send(msg, broadcast=True)
+
+
+@socketio.on('connect', namespace='/chat')
+def test_connect():
+    emit('my_response', {'data': 'Connected!'})
+    print('Client connected', request.sid)
+
+
+@socketio.on('disconnect', namespace='/chat')
+def test_disconnect():
+    print('Client disconnected', request.sid)
 
 
 if __name__ == '__main__':

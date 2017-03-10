@@ -3,25 +3,20 @@
  * Andrew Welleck
  */
 $(document).ready(function() {
-  var socket = io.connect('http://' + document.domain + ':' + location.port);
+  namespace = '/chat';
+  var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
+  console.log(socket);
 
-  var offset = new Date().getTimezoneOffset();
-  var second = '{{ second }}';
-  console.log('Offset in minutes: ' + offset);
-  var hours = offset / 60
-  console.log('Offest in hours: ' + hours)
-
-  socket.on('connect', function() {
-    socket.send('User has connected!');
+  socket.on('connect', function(){
+    socket.emit('success', {data: 'User connected!'});
   });
 
-  socket.on('message', function(msg) {
-    $("#messages").append('<li>' + msg + '</li>');
-    console.log('Received message!');
+  socket.on('my_response', function(msg) {
+    $('#log').append($('<div/>').html('<div>' + msg.data + '</div>').html());
   });
 
-  $('#submit').on('click', function() {
-    socket.send($('#input').val());
-    $('#input').val('');
+  $('form#emit').submit(function(event){
+    socket.emit('my_event', {data: $('#emit_data').val()});
+    return false;
   });
 });
