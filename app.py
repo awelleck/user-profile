@@ -202,12 +202,13 @@ def test():
 @login_required
 def chat():
     if request.method == 'GET':
+        current_user = session['username']
         history_list = []
         history = Chat.query.all()
         for entries in history:
             history_list.append((entries.username, entries.messages,
                                  entries.msg_timestamp))
-        return render_template('chat.html', history=history_list)
+        return render_template('chat.html', history=history_list, current_user=current_user)
 
 
 if __name__ == '__main__':

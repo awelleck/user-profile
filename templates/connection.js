@@ -12,11 +12,17 @@ $(document).ready(function() {
   });
 
   socket.on('my_response', function(msg) {
-    $('#log').append($('<div/>').html('<div>' + msg.data + '</div>').html());
+    var current_user = "{{ current_user }}";
+    $('#log').append($('<div/>').html('<div>' + current_user + " | " + msg.data + '</div>').html());
   });
 
   $('form#emit').submit(function(event){
     socket.emit('my_event', {data: $('#emit_data').val()});
     return false;
   });
+
+  var offset = new Date().getTimezoneOffset();
+  console.log('Offset in minutes: ' + offset);
+  var hours = (offset / 60);
+  console.log('Offset in hours: ' + hours);
 });
