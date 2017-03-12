@@ -12,12 +12,14 @@ from flask_socketio import SocketIO, Namespace, send, emit, disconnect
 
 from db import User, Chat
 from validate import LoginForm, RegistrationForm
+from chat import MyNamespace
 
 app = Flask(__name__)
 app.secret_key = os.environ['KEY']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 socketio = SocketIO(app)
+socketio.on_namespace(MyNamespace('/chat'))
 
 
 def hash_password(password):
@@ -206,28 +208,6 @@ def chat():
             history_list.append((entries.username, entries.messages,
                                  entries.msg_timestamp))
         return render_template('chat.html', history=history_list)
-
-
-@socketio.on('my_event', namespace='/chat')
-def test_message(message):
-    emit('my_response', {'data': message['data']})
-    try:
-        current_user = session['username']
-    except KeyError:
-        current_user = 'anonymous'
-    submit_db = Chat(current_user, message['data'])
-    Chat.insert(submit_db)
-
-
-@socketio.on('connect', namespace='/chat')
-def test_connect():
-    emit('my_response', {'data': 'Connected!'})
-    print('Client connected', request.sid)
-
-
-@socketio.on('disconnect', namespace='/chat')
-def test_disconnect():
-    print('Client disconnected', request.sid)
 
 
 if __name__ == '__main__':
