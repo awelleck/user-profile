@@ -141,6 +141,7 @@ def profile(username):
                                last_name=last_name)
     if request.method == 'POST':
         return redirect(url_for('logout'))
+
     return render_template('profile.html', username=username)
 
 
@@ -208,7 +209,8 @@ def chat():
         for entries in history:
             history_list.append((entries.username, entries.messages,
                                  entries.msg_timestamp))
-        return render_template('chat.html', history=history_list, current_user=current_user)
+        return render_template('chat.html', history=history_list,
+                               current_user=current_user)
 
 
 if __name__ == '__main__':
