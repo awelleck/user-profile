@@ -6,13 +6,16 @@ from flask import Flask
 from flask_testing import TestCase
 from flask_sqlalchemy import SQLAlchemy
 
+
 class MyTest(TestCase):
+    app = Flask(__name__)
     SQLALCHEMY_DATABASE_URI = "sqlite://"
+    db = SQLAlchemy(app)
     TESTING = True
 
     def create_app(self):
         app = Flask(__name__)
-        #app.config['TESTING'] = True
+        # app.config['TESTING'] = True
         app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite://"
         db = SQLAlchemy(app)
         print("creating app")
@@ -20,7 +23,7 @@ class MyTest(TestCase):
         return app
 
     def setUp(self):
-        #app = create_app()
+        # app = create_app()
         print("Setting up DB and stuff")
         self.db.create_all()
         self.db.session.commit()
@@ -30,8 +33,8 @@ class MyTest(TestCase):
         self.db.session.remove()
         self.db.drop_all()
 
-class SomeTest(MyTest):
 
+class SomeTest(MyTest):
     def test_something(self):
         username = 'one'
         password = 'two'
@@ -40,17 +43,9 @@ class SomeTest(MyTest):
         last_name = 'six'
 
         user = User(username, password, email, first_name, last_name)
-
         self.db.session.add(user)
         self.db.session.commit()
-
-        # this works
         assert user in self.db.session
-
-        #response = self.client.get("/")
-
-        # this raises an AssertionError
-        #assert user in db.session
 
 if __name__ == '__main__':
     unittest.main()
