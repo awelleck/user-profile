@@ -17,7 +17,7 @@ from chat import MyNamespace
 app = Flask(__name__)
 app.secret_key = os.environ['KEY']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
 socketio = SocketIO(app)
 socketio.on_namespace(MyNamespace('/chat'))
 
