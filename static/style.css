@@ -26,8 +26,8 @@ h1 { font-size: 2em; color: #fff; font-weight: 100; text-align: center; }
 .mdl-textfield__input { border-bottom: 1px solid #E0E0E0; color: #E0E0E0; } /*light grey*/
 .mdl-textfield__label { color: #9E9E9E; } /*dark grey*/
 .mdl-grid.center-items { justify-content: center; }
-.mdl-button--raised { min-width: 180px; margin: 10px; min-height: 50px; padding: 0; line-height: 50px; float:left; }
-.mdl-button--fab { color: #2196F3; }
+.mdl-button--raised { min-width: 180px; margin: 10px; min-height: 50px; padding: 0; line-height: 50px; float: center; }
+.mdl-button--fab.mdl-button--colored { background: #2196F3; }
 .card-wide.mdl-card { width: 512px; background: #303030; align-items: center; justify-content: center; }
 
 .scroll { background-color: #E3F2FD; /*light grayish blue*/ width: 500px; height: 350px; overflow: scroll; }
