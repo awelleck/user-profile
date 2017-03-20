@@ -3,6 +3,7 @@ from datetime import datetime
 from flask import Flask, request
 from utils import db
 
+
 class User(db.Model):
     __tablename__ = 'entries'
 

@@ -11,6 +11,7 @@ email = 'three@four.com'
 first_name = 'five'
 last_name = 'six'
 
+
 class MyTest(TestCase):
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
     TESTING = True
