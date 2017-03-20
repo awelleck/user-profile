@@ -1,51 +1,50 @@
-import sqlite3
 import unittest
-import sqlalchemy
-from db import User, Chat
+from utils import db
+from models import User
 from flask import Flask
 from flask_testing import TestCase
-from flask_sqlalchemy import SQLAlchemy
 
+
+username = 'one'
+password = 'two'
+email = 'three@four.com'
+first_name = 'five'
+last_name = 'six'
 
 class MyTest(TestCase):
-    app = Flask(__name__)
-    SQLALCHEMY_DATABASE_URI = "sqlite://"
-    db = SQLAlchemy(app)
+    SQLALCHEMY_DATABASE_URI = 'sqlite://'
     TESTING = True
 
     def create_app(self):
         app = Flask(__name__)
-        # app.config['TESTING'] = True
-        app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite://"
-        db = SQLAlchemy(app)
-        print("creating app")
-        self.db = db
+        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+        db.init_app(app)
+        db.app = app
         return app
 
     def setUp(self):
-        # app = create_app()
-        print("Setting up DB and stuff")
-        self.db.create_all()
-        self.db.session.commit()
-        print(self.db.reflect())
+        db.session.remove()
+        db.drop_all()
+        db.create_all()
 
     def tearDown(self):
-        self.db.session.remove()
-        self.db.drop_all()
+        db.session.remove()
+        db.drop_all()
 
-
-class SomeTest(MyTest):
-    def test_something(self):
-        username = 'one'
-        password = 'two'
-        email = 'three@four.com'
-        first_name = 'five'
-        last_name = 'six'
-
+    def test_insert(self):
         user = User(username, password, email, first_name, last_name)
-        self.db.session.add(user)
-        self.db.session.commit()
-        assert user in self.db.session
+
+        db.session.add(user)
+        db.session.commit()
+
+        actual = User.query.filter_by(username=username).first()
+
+        self.assertEqual(username, actual.username)
+        self.assertEqual(password, actual.password)
+        self.assertEqual(email, actual.email)
+        self.assertEqual(first_name, actual.first_name)
+        self.assertEqual(last_name, actual.last_name)
+
 
 if __name__ == '__main__':
     unittest.main()

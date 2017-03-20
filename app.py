@@ -9,15 +9,20 @@ from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
 from flask_socketio import SocketIO, Namespace, send, emit, disconnect
-
-from db import User, Chat
+from models import User, Chat
 from validate import LoginForm, RegistrationForm
 from chat import MyNamespace
+from utils import db
 
 app = Flask(__name__)
 app.secret_key = os.environ['KEY']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = ('postgresql+psycopg2://' +
+                                         os.environ['USER'] + ':' +
+                                         os.environ['PASS'] +
+                                         '@localhost/practice')
+db.init_app(app)
+db.app = app
 socketio = SocketIO(app)
 socketio.on_namespace(MyNamespace('/chat'))
 

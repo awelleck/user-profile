@@ -1,16 +1,7 @@
 import os
 from datetime import datetime
 from flask import Flask, request
-from flask_sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = ('postgresql+psycopg2://' +
-                                         os.environ['USER'] + ':' +
-                                         os.environ['PASS'] +
-                                         '@localhost/practice')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
+from utils import db
 
 class User(db.Model):
     __tablename__ = 'entries'

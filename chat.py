@@ -1,7 +1,7 @@
 from flask import Flask, request, session
 from flask_socketio import SocketIO, Namespace, emit, disconnect
 
-from db import Chat
+from models import Chat
 
 
 class MyNamespace(Namespace):

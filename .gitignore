@@ -5,6 +5,8 @@
 
 # Virtualenv
 ENV
+*.cfg
 
 # Python bytecode-compiled files
 __pycache__
+.pyc
