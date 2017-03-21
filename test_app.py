@@ -12,7 +12,7 @@ first_name = 'five'
 last_name = 'six'
 
 
-class MyTest(TestCase):
+class TestUser(TestCase):
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
     TESTING = True
 
@@ -35,8 +35,7 @@ class MyTest(TestCase):
     def test_insert(self):
         user = User(username, password, email, first_name, last_name)
 
-        db.session.add(user)
-        db.session.commit()
+        User.insert(user)
 
         actual = User.query.filter_by(username=username).first()
 
@@ -45,6 +44,16 @@ class MyTest(TestCase):
         self.assertEqual(email, actual.email)
         self.assertEqual(first_name, actual.first_name)
         self.assertEqual(last_name, actual.last_name)
+
+    def test_delete(self):
+        user = User(username, password, email, first_name, last_name)
+
+        User.insert(user)
+        User.delete(user)
+
+        actual = User.query.filter_by(username=username).first()
+
+        self.assertIsNone(actual)
 
 
 if __name__ == '__main__':
