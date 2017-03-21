@@ -1,6 +1,7 @@
 Flask
 Flask-API
 Flask-Testing
+Flask-SQLAlchemy
 flask-socketio
 eventlet
 SQLAlchemy
