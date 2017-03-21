@@ -1,8 +1,9 @@
 Flask
 Flask-API
-SQLAlchemy
-psycopg2
-pep8
-WTForms
+Flask-Testing
 flask-socketio
 eventlet
+SQLAlchemy
+psycopg2
+WTForms
+pep8

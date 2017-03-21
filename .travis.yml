@@ -1,8 +1,10 @@
 language: python
 python:
   - "3.5" #Python 3.5.2
-install: pip install -r requirements.txt
+install:
+  - pip install -r requirements.txt
 script:
   - pep8 .
+  - python test_app.py
 notifications:
   email: False

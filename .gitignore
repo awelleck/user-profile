@@ -4,9 +4,9 @@
 .LSOverride
 
 # Virtualenv
-ENV
+ENV/
 *.cfg
 
 # Python bytecode-compiled files
-__pycache__
-.pyc
+__pycache__/
+*.pyc
