@@ -7,12 +7,12 @@ h1 { font-size: 2em; color: #fff; font-weight: 100; text-align: center; }
 .readme a { text-decoration: none; }
 .readme { padding-top: 2em; padding-bottom: 2em; }
 .input-section { padding-top: 1em; padding-bottom: 10em; }
-.send { margin-left: 2em; }
+.send { margin-left: 2em; margin-top: 1em; }
 .icons-top { margin-top: 1em; padding-left: 60px; }
 .icons-ext { margin-top: 1.6em; padding-left: 60px; }
 .grey300-text { color: #E0E0E0; }
 .welcome { margin-left: 4.5em; margin-top: 3em; }
-.border { border-style: groove; width: 35em; height: 32em; margin-left: 5em; }
+.border { border-style: groove; width: 42em; height: 32em; margin-left: 5em; }
 .center { justify-content: center; }
 .light { width: 100%; height: 300px; background-color: #fff; align-items: center; justify-content: center; }
 .mdl-center { text-align: center; }
@@ -30,4 +30,4 @@ h1 { font-size: 2em; color: #fff; font-weight: 100; text-align: center; }
 .mdl-button--fab.mdl-button--colored { background: #2196F3; }
 .card-wide.mdl-card { width: 512px; background: #303030; align-items: center; justify-content: center; }
 
-.scroll { background-color: #E3F2FD; /*light grayish blue*/ width: 500px; height: 350px; overflow: scroll; }
+#log { height: 350px; width: 500px; overflow-y: auto; background-color: #E3F2FD; } /*light grayish blue*/
