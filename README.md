@@ -27,6 +27,8 @@ To test
 
 * Source username and password for database as well as the key for Python Flask sessions
 * `python app.py`
+* To run tests: `python test_app.py`
+* Tests are also automatically run with each build by TravisCI
 
 or
 
