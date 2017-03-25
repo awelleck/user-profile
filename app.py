@@ -130,6 +130,7 @@ def register():
 @app.route('/profile/<username>', methods=['GET', 'POST'])
 @login_required
 def profile(username):
+    form = RegistrationForm(request.form)
     print('Printing session[\'username\']: %s' % session['username'])
     if username != session['username']:
         return redirect(url_for('index'))
@@ -144,7 +145,11 @@ def profile(username):
         return render_template('profile.html', username=username, user=user,
                                email=email, first_name=first_name,
                                last_name=last_name)
-    if request.method == 'POST':
+    if request.method == 'POST' and form.validate():
+        change_first_name = request.form['first_name']
+        load_profile.first_name = change_first_name
+        User.update()
+
         return redirect(url_for('logout'))
 
     return render_template('profile.html', username=username)
