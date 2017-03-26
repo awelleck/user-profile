@@ -37,6 +37,16 @@
       </tbody>
     </table>
 
+  <form method="POST" action="#">
+    <div class="mdl-textfield mdl-js-textfield">
+      {{ form.change_first_name(class="mdl-textfield__input", type="text", id="change_first_name") }}
+      <label class="mdl-textfield__label" for="change_first_name">First Name</label>
+    </div>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">
+      change first name
+    </button>
+  </form>
+
     <a href="{{ url_for('logout') }}"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad pad-top">
       Logout
     </button></a>

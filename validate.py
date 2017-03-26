@@ -25,3 +25,9 @@ class RegistrationForm(Form):
     last_name = StringField('Last Name', [validators.Length(min=2, max=35,
                             message='Last name must be between 2 and 35 ' +
                             'characters long!')])
+
+
+class ProfileForm(Form):
+    change_first_name = StringField('First Name', [validators.Length(min=2,
+                                    max=35, message='First name must be ' +
+                                    'between 2 and 35 characters long!')])

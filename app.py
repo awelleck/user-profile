@@ -10,7 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
 from flask_socketio import SocketIO, Namespace, send, emit, disconnect
 from models import User, Chat
-from validate import LoginForm, RegistrationForm
+from validate import LoginForm, RegistrationForm, ProfileForm
 from chat import MyNamespace
 from utils import db
 
@@ -130,29 +130,36 @@ def register():
 @app.route('/profile/<username>', methods=['GET', 'POST'])
 @login_required
 def profile(username):
-    form = RegistrationForm(request.form)
+    form = ProfileForm(request.form)
     print('Printing session[\'username\']: %s' % session['username'])
+
     if username != session['username']:
         return redirect(url_for('index'))
 
-    if request.method == 'GET':
+    if request.method == 'POST':
         load_profile = User.query.filter_by(username=session['username']
                                             ).first()
         user = load_profile.username
         email = load_profile.email
         first_name = load_profile.first_name
         last_name = load_profile.last_name
-        return render_template('profile.html', username=username, user=user,
+        change_first_name = request.form['change_first_name']
+        print(change_first_name)
+        return render_template('profile.html',
+                               form=form, username=username, user=user,
                                email=email, first_name=first_name,
-                               last_name=last_name)
-    if request.method == 'POST' and form.validate():
-        change_first_name = request.form['first_name']
-        load_profile.first_name = change_first_name
-        User.update()
+                               last_name=last_name), status.HTTP_201_CREATED
 
-        return redirect(url_for('logout'))
+    load_profile = User.query.filter_by(username=session['username']
+                                        ).first()
+    user = load_profile.username
+    email = load_profile.email
+    first_name = load_profile.first_name
+    last_name = load_profile.last_name
 
-    return render_template('profile.html', username=username)
+    return render_template('profile.html', form=form, username=username,
+                           user=user, email=email, first_name=first_name,
+                           last_name=last_name)
 
 
 # logout route for button
