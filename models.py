@@ -22,6 +22,13 @@ class User(db.Model):
         db.session.add(submit_db)
         db.session.commit()
 
+    def update(first_name, change_first_name):
+        db_entry = User.query.filter_by(first_name=first_name).first()
+        db_entry.first_name = change_first_name
+        db.session.add(db_entry)
+        db.session.commit()
+        return True
+
     def delete(username):
         db.session.delete(username)
         db.session.commit()

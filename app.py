@@ -145,6 +145,7 @@ def profile(username):
         last_name = load_profile.last_name
         change_first_name = request.form['change_first_name']
         print(change_first_name)
+        User.update(first_name, change_first_name)
         return render_template('profile.html',
                                form=form, username=username, user=user,
                                email=email, first_name=first_name,
