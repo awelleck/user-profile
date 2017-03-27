@@ -56,6 +56,16 @@ class TestUser(TestCase):
 
         self.assertIsNone(actual)
 
+    def test_update(self):
+        new_first_name = 'seven'
+        user = User(username, password, email, first_name, last_name)
+
+        User.insert(user)
+        User.update(first_name, new_first_name)
+
+        actual = User.query.filter_by(username=username).first
+        self.assertEqual('seven', actual.first_name)
+
 
 class TestChat(TestCase):
     SQLALCHEMY_DATABASE_URI = 'sqlite://'

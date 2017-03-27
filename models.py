@@ -44,7 +44,7 @@ class User(db.Model):
         self.last_name = last_name
 
     def __repr__(self):
-        return ('<User(username=%s, password=%s, email=%s,' +
+        return ('<User(username=%s, password=%s, email=%s, ' +
                 'first_name=%s, last_name=%s)>') % (self.username,
                                                     self.password,
                                                     self.email,
