@@ -63,7 +63,8 @@ class TestUser(TestCase):
         User.insert(user)
         User.update(first_name, new_first_name)
 
-        actual = User.query.filter_by(username=username).first
+        actual = User.query.filter_by(username=username).first()
+
         self.assertEqual('seven', actual.first_name)
 
 
