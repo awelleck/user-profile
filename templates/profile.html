@@ -35,7 +35,7 @@
           <td>
             <form method="POST" action="#">
               <div class="mdl-textfield mdl-js-textfield pad">
-                {{ form.change_first_name(class="mdl-textfield__input", type="text", id="change_first_name") }}
+                {{ form1.change_first_name(class="mdl-textfield__input", type="text", id="change_first_name") }}
                 <label class="mdl-textfield__label" for="change_first_name">First Name</label>
               </div>
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">
@@ -47,7 +47,17 @@
         <tr>
           <td class="mdl-data-table__cell--non-numeric">Last Name</td>
           <td>{{ last_name }}</td>
-          <td></td>
+          <td>
+            <form method="POST" action="#">
+              <div class="mdl-textfield mdl-js-textfield pad">
+                {{ form2.change_last_name(class="mdl-textfield__input", type="text", id="change_last_name") }}
+                <label class="mdl-textfield__label" for="change_last_name">Last Name</label>
+              </div>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">
+                change last name
+              </button>
+            </form>
+          </td>
         </tr>
       </tbody>
     </table>
