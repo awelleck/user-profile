@@ -244,7 +244,8 @@ def chat():
         history = Chat.query.all()
         for entries in history:
             history_list.append((entries.username, entries.messages,
-                                 entries.msg_timestamp.strftime('%m/%d/%y %H:%M')))
+                                entries.msg_timestamp.
+                                strftime('%m/%d/%y %H:%M')))
         return render_template('chat.html', history=history_list,
                                current_user=current_user)
 
