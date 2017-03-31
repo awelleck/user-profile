@@ -9,6 +9,8 @@ User profile system with authentication:
 * Front-end framwork by [Material Design Lite](https://getmdl.io/)
 * Client/server communication for chat leverages [Flask-Socket IO](https://flask-socketio.readthedocs.io/en/latest/) and [Eventlet](http://eventlet.net/)
 
+![Screenshot](/static/index.png?raw=true "Screenshot of index")
+
 Using [Homebrew](http://brew.sh/) for package manager
 
 * `brew update`
