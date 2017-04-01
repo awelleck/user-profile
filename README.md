@@ -9,8 +9,8 @@ User profile system with authentication:
 * Front-end framwork by [Material Design Lite](https://getmdl.io/)
 * Client/server communication for chat leverages [Flask-Socket IO](https://flask-socketio.readthedocs.io/en/latest/) and [Eventlet](http://eventlet.net/)
 
-<img src="https://github.com/awelleck/user-profile/blob/master/static/index.png" width="150">
-<img src="https://github.com/awelleck/user-profile/blob/master/static/chat.png" width="150">
+<div><img src="https://github.com/awelleck/user-profile/blob/master/static/index.png" width="300">
+<img src="https://github.com/awelleck/user-profile/blob/master/static/chat.png" width="300"></div>
 
 Using [Homebrew](http://brew.sh/) for package manager
 
