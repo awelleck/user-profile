@@ -1,77 +1,77 @@
-{% extends "layout.html" %}
-{% block title %}Index{% endblock %}
-{% block custom %}
+{%- extends "layout.html" %}
+{%- block title %}Index{% endblock %}
+{%- block custom %}
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 {% include "custom.js" %}
 </script>
-{% endblock %}
-{% block index %}
+{%- endblock %}
+{%- block index %}
 {% block background %}<body background="{{ url_for('static', filename='clouds.jpg') }}">{% endblock %}
-  <h1>User profile with authentication and chat.</h1>
-    <form method="POST" action="/">
-    <div class="mdl-grid mdl-center picture">
-      <div class="mdl-cell mdl-cell--4-col">
-        {% if form.errors %}
-          <div class="errors">
-            {% for field in form.errors %}
-            {% for error in form.errors[field] %}
-            <p>{{ error }}</p>
-            {% endfor %}
-            {% endfor %}
+      <h1>User profile with authentication and chat.</h1>
+        <form method="POST" action="/">
+        <div class="mdl-grid mdl-center picture">
+          <div class="mdl-cell mdl-cell--4-col">
+            {% if form.errors %}
+              <div class="errors">
+                {%- for field in form.errors %}
+                {%- for error in form.errors[field] %}
+                <p>{{ error }}</p>
+                {% endfor -%}
+                {% endfor -%}
+              </div>
+            {% endif %}
+            <p class=pad>{{ warn }}</p>
           </div>
-        {% endif %}
-        <p class=pad>{{ warn }}</p>
-      </div>
-      <div class="mdl-cell mdl-cell--4-col">
-        <div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            {{ form.username(class="mdl-textfield__input") }}
-            <label class="mdl-textfield__label">username</label>
+          <div class="mdl-cell mdl-cell--4-col">
+            <div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{ form.username(class="mdl-textfield__input") }}
+                <label class="mdl-textfield__label">username</label>
+              </div>
+            </div>
+            <div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{ form.password(class="mdl-textfield__input") }}
+                <label class="mdl-textfield__label">password</label>
+              </div>
+            </div>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">
+              login
+            </button>
+          </form>
+
+          <a href="{{ url_for('register') }}" class="mdl-button mdl-js-button mdl-button--raised    mdl-button--colored">
+            register
+          </a>
           </div>
+          <div class="mdl-cell mdl-cell--4-col"></div>
         </div>
-        <div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            {{ form.password(class="mdl-textfield__input") }}
-            <label class="mdl-textfield__label">password</label>
-          </div>
-        </div>
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">
-          login
+
+      <div class="mdl-center">
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored    mdl-center" id="arrow">
+          <i class="material-icons">expand_more</i>
         </button>
-      </form>
-
-      <a href="{{ url_for('register') }}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-        register
-      </a>
       </div>
-      <div class="mdl-cell mdl-cell--4-col"></div>
-    </div>
 
-  <div class="mdl-center">
-    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-center" id="arrow">
-      <i class="material-icons">expand_more</i>
-    </button>
-  </div>
-
-  <div class="light" id="light">
-    <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--4-col"></div>
-      <div class="mdl-cell mdl-cell--4-col">
-        <p>Welcome to the index! User profile system with authentication: Web framework: Flask, Backend framework: Flask-SQLAlchemy using Psycopg2 driver to connect to PostgreSQL relational database, Form validation by WTForms, Front-end framwork by Material Design Lite, Client/server communication for chat leverages Flask-Socket IO and Eventlet</p>
+      <div class="light" id="light">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--4-col"></div>
+          <div class="mdl-cell mdl-cell--4-col">
+            <p>Welcome to the index! User profile system with authentication: Web framework: Flask, Backend     framework: Flask-SQLAlchemy using Psycopg2 driver to connect to PostgreSQL relational database, Form    validation by WTForms, Front-end framwork by Material Design Lite, Client/server communication for    chat leverages Flask-Socket IO and Eventlet</p>
+          </div>
+          <div class="mdl-cell mdl-cell--4-col"></div>
+        </div>
       </div>
-      <div class="mdl-cell mdl-cell--4-col"></div>
-    </div>
-  </div>
 
-  <div class="readme mdl-color--grey-800 mdl-typography--text-center">
-    <a href="https://github.com/awelleck/user-profile/blob/master/README.md" class="mdl-color-text--grey-50">readme</a>
-  </div>
+      <div class="readme mdl-color--grey-800 mdl-typography--text-center">
+        <a href="https://github.com/awelleck/user-profile/blob/master/README.md" class="mdl-color-text--grey-50">   readme</a>
+      </div>
 
-  <footer class="mdl-mini-footer mdl-color--grey-900" id="hello">
-    <div class="mdl-mini-footer__right-section">
-      <p>&copy; 2017 Andrew Welleck</p>
-    </div>
-  </footer>
-{% endblock %}
+      <footer class="mdl-mini-footer mdl-color--grey-900" id="hello">
+        <div class="mdl-mini-footer__right-section">
+          <p>&copy; 2017 Andrew Welleck</p>
+        </div>
+      </footer>
+{%- endblock %}
