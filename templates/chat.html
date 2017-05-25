@@ -1,23 +1,23 @@
-{% extends "layout.html" %}
+{%- extends "layout.html" %}
 {% block title %}Chat{% endblock %}
-{% block socketio %}
+{%- block socketio %}
 <!-- socket.io -->
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 {% include "connection.js" %}
 </script>
-{% endblock %}
-{% block chat %}
+{% endblock -%}
+{%- block chat %}
 <section class="input-section mdl-color--blue-50">
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--6-col">
       <div class="border">
         <div class="scroll pad pad-top">
           <div id="log">
-            {% for username, messages, msg_timestamp in history %}
+            {%- for username, messages, msg_timestamp in history %}
             <div>{{ username }} | {{ messages }} | {{ msg_timestamp }}</div>
-            {% endfor %}
+            {%- endfor %}
           </div>
         </div>
 
@@ -37,4 +37,4 @@
     </div><div class="mdl-cell mdl-cell--2-col"></div>
   </div>
 </section>
-{% endblock %}
+{% endblock -%}
