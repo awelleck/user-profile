@@ -37,6 +37,14 @@ or
 
 * Use http://127.0.0.1:5000/ in browser
 
+Example config.cfg file:
+
+```export USER=postgres_user
+export PASS=postgres_password
+export KEY=flask_secret_key```
+
+`source config.cfg`
+
 To dump/restore PostgreSQL database
 
 * `pg_dump dbname > outfile`
