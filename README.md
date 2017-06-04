@@ -19,14 +19,14 @@ Using [Homebrew](http://brew.sh/) for package manager
 * `brew install python3`
 * `brew install postgresql`
 
-Setting up virtualenv to use Python 3
+## Setting up virtualenv to use Python 3
 
 * `virtualenv ENV`
 * `source ENV/bin/activate`
 * `virtualenv -p python3 env`
 * `pip install -r requirements.txt`
 
-To test
+## To test
 
 * Source username and password for database as well as the key for Python Flask sessions
 * `python app.py`
@@ -37,21 +37,22 @@ or
 
 * Use http://127.0.0.1:5000/ in browser
 
-Example config.cfg file:
+## Example config.cfg file:
 
-```export USER=postgres_user
+```
+export USER=postgres_user
 export PASS=postgres_password
 export KEY=flask_secret_key
 ```
 
-`source config.cfg`
+then `source config.cfg`
 
-To dump/restore PostgreSQL database
+## To dump/restore PostgreSQL database
 
 * `pg_dump dbname > outfile`
 * `psql dbname < infile`
 
-To create DB tables
+## To create DB tables
 
 * `\i schema.sql` from psql prompt
 
