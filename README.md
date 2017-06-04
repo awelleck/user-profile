@@ -41,7 +41,8 @@ Example config.cfg file:
 
 ```export USER=postgres_user
 export PASS=postgres_password
-export KEY=flask_secret_key```
+export KEY=flask_secret_key
+```
 
 `source config.cfg`
 
