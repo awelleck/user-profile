@@ -43,6 +43,7 @@ or
 export USER=postgres_user
 export PASS=postgres_password
 export KEY=flask_secret_key
+export DB=localhost/database_name
 ```
 
 then `source config.cfg`

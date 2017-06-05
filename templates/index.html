@@ -1,13 +1,12 @@
-{%- extends "layout.html" %}
-{%- block title %}Index{% endblock %}
-{%- block custom %}
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" charset="utf-8">
-{% include "custom.js" %}
-</script>
-{%- endblock %}
-{%- block index %}
+{% extends "layout.html" %}
+    {% block title %}Index{% endblock %}
+    {% block custom %}
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    {% include "custom.js" %}</script>
+    {% endblock %}
+{% block index %}
 {% block background %}<body background="{{ url_for('static', filename='clouds.jpg') }}">{% endblock %}
       <h1>User profile with authentication and chat.</h1>
         <form method="POST" action="/">
@@ -15,11 +14,11 @@
           <div class="mdl-cell mdl-cell--4-col">
             {% if form.errors %}
               <div class="errors">
-                {%- for field in form.errors %}
-                {%- for error in form.errors[field] %}
+                {% for field in form.errors %}
+                {% for error in form.errors[field] %}
                 <p>{{ error }}</p>
-                {% endfor -%}
-                {% endfor -%}
+                {% endfor %}
+                {% endfor %}
               </div>
             {% endif %}
             <p class=pad>{{ warn }}</p>
@@ -74,4 +73,4 @@
           <p>&copy; 2017 Andrew Welleck</p>
         </div>
       </footer>
-{%- endblock %}
+{% endblock %}

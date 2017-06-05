@@ -16,12 +16,14 @@ from chat import MyNamespace
 from utils import db
 
 app = Flask(__name__)
+app.jinja_env.lstrip_blocks = True
+app.jinja_env.trim_blocks = True
 app.secret_key = os.environ['KEY']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = ('postgresql+psycopg2://' +
                                          os.environ['USER'] + ':' +
-                                         os.environ['PASS'] +
-                                         '@localhost/practice')
+                                         os.environ['PASS'] + '@' +
+                                         os.environ['DB'])
 db.init_app(app)
 db.app = app
 socketio = SocketIO(app)
