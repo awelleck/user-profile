@@ -12,7 +12,11 @@
     {% block custom %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
   </head>
-  {% block background %}<body>{% endblock %}
+  {% if request.endpoint == 'index' %}
+  <body style="background-image:url({{ url_for('static', filename='clouds.jpg') }})">
+  {% else %}
+  <body>
+  {% endif %}
     <!-- Always shows a header, even in smaller screens. -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header">
