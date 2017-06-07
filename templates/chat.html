@@ -1,40 +1,38 @@
-{%- extends "layout.html" %}
+{% extends "layout.html" %}
 {% block title %}Chat{% endblock %}
-{%- block socketio %}
-<!-- socket.io -->
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" charset="utf-8">
-{% include "connection.js" %}
-</script>
-{% endblock -%}
-{%- block chat %}
-<section class="input-section mdl-color--blue-50">
-  <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--6-col">
-      <div class="border">
-        <div class="scroll pad pad-top">
-          <div id="log">
-            {%- for username, messages, msg_timestamp in history %}
-            <div>{{ username }} | {{ messages }} | {{ msg_timestamp }}</div>
-            {%- endfor %}
-          </div>
-        </div>
-
-        <form id="emit" method="POST" action="#" class="pad">
-          <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" id="emit_data">
-            <label class="mdl-textfield__label" for="emit_data">send</label>
-          </div>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored send" type="submit" id="submit">
-            Send
-          </button>
-        </form>
-      </div>
-    </div>
-    <div class="mdl-cell mdl-cell--4-col">
-      <p class="welcome">Welcome to chat! The client/server communication for chat leverages Flask-Socket IO and Eventlet. If you are logged in, your username, and the timestamp of your message will be saved in the PostgreSQL DB.</p>
-    </div><div class="mdl-cell mdl-cell--2-col"></div>
-  </div>
-</section>
-{% endblock -%}
+{% block socketio %}
+    <!-- socket.io -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    {% include "connection.js" %}</script>
+{% endblock %}
+{% block chat %}
+          <section class="input-section mdl-color--blue-50">
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="border">
+                  <div class="scroll pad pad-top">
+                    <div id="log">
+                      {% for username, messages, msg_timestamp in history %}
+                      <div>{{ username }} | {{ messages }} | {{ msg_timestamp }}</div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <form id="emit" method="POST" action="#" class="pad">
+                    <div class="mdl-textfield mdl-js-textfield">
+                      <input class="mdl-textfield__input" type="text" id="emit_data">
+                      <label class="mdl-textfield__label" for="emit_data">send</label>
+                    </div>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored send" type="submit" id="submit">
+                      Send
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--4-col">
+                <p class="welcome">Welcome to chat! The client/server communication for chat leverages Flask-Socket IO and Eventlet. If you are logged in, your username, and the timestamp of your message will be saved in the PostgreSQL DB.</p>
+              </div><div class="mdl-cell mdl-cell--2-col"></div>
+            </div>
+          </section>
+{% endblock %}
