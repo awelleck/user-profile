@@ -1,69 +1,68 @@
 {% extends "layout.html" %}
 {% block title %}Profile{% endblock %}
 {% block profile %}
-  <section class="input-section mdl-color--blue-50">
-    <h4 class="mdl-typography--text-center">profile.html</h4>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for message in messages %}
-          <p class="pad">{{ message }}</p>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp pad">
-      <thread>
-        <tr>
-          <th class="mdl-data-table__cell--non-numeric">{{ username }}'s profile</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thread>
-      <tbody>
-        <tr>
-          <td class="mdl-data-table__cell--non-numeric">Username</td>
-          <td>{{ user }}</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td class="mdl-data-table__cell--non-numeric">Email</td>
-          <td>{{ email }}</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td class="mdl-data-table__cell--non-numeric">First Name</td>
-          <td>{{ first_name }}</td>
-          <td>
-            <form method="POST" action="#">
-              <div class="mdl-textfield mdl-js-textfield pad">
-                {{ form1.change_first_name(class="mdl-textfield__input", type="text", id="change_first_name") }}
-                <label class="mdl-textfield__label" for="change_first_name">First Name</label>
-              </div>
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">
-                change first name
-              </button>
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <td class="mdl-data-table__cell--non-numeric">Last Name</td>
-          <td>{{ last_name }}</td>
-          <td>
-            <form method="POST" action="#">
-              <div class="mdl-textfield mdl-js-textfield pad">
-                {{ form2.change_last_name(class="mdl-textfield__input", type="text", id="change_last_name") }}
-                <label class="mdl-textfield__label" for="change_last_name">Last Name</label>
-              </div>
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">
-                change last name
-              </button>
-            </form>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <a href="{{ url_for('logout') }}"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad pad-top">
-      Logout
-    </button></a>
-  </section>
+          <section class="input-section mdl-color--blue-50">
+            <h4 class="mdl-typography--text-center">profile.html</h4>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                  <p class="pad">{{ message }}</p>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp pad">
+              <thread>
+                <tr>
+                  <th class="mdl-data-table__cell--non-numeric">{{ username }}'s profile</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thread>
+              <tbody>
+                <tr>
+                  <td class="mdl-data-table__cell--non-numeric">Username</td>
+                  <td>{{ user }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="mdl-data-table__cell--non-numeric">Email</td>
+                  <td>{{ email }}</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="mdl-data-table__cell--non-numeric">First Name</td>
+                  <td>{{ first_name }}</td>
+                  <td>
+                    <form method="POST" action="#">
+                      <div class="mdl-textfield mdl-js-textfield pad">
+                        {{ form1.change_first_name(class="mdl-textfield__input", type="text", id="change_first_name") }}
+                        <label class="mdl-textfield__label" for="change_first_name">First Name</label>
+                      </div>
+                      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">
+                        change first name
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mdl-data-table__cell--non-numeric">Last Name</td>
+                  <td>{{ last_name }}</td>
+                  <td>
+                    <form method="POST" action="#">
+                      <div class="mdl-textfield mdl-js-textfield pad">
+                        {{ form2.change_last_name(class="mdl-textfield__input", type="text", id="change_last_name") }}
+                        <label class="mdl-textfield__label" for="change_last_name">Last Name</label>
+                      </div>
+                      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">
+                        change last name
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <a href="{{ url_for('logout') }}"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored pad pad-top">
+              Logout
+            </button></a>
+          </section>
 {% endblock %}
