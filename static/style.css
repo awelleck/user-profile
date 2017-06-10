@@ -1,6 +1,5 @@
 ul { list-style-type: none; }
 body { background-color: #303030; } /*slate grey*/
-h1 { font-size: 2em; color: #fff; font-weight: 100; text-align: center; }
 
 .pad { margin-left: 5em; }
 .pad-top { margin-top: 1.5em; }
@@ -17,6 +16,10 @@ h1 { font-size: 2em; color: #fff; font-weight: 100; text-align: center; }
 .light { width: 100%; height: 300px; background-color: #fff; align-items: center; justify-content: center; }
 .mdl-center { text-align: center; }
 .picture { width: 100%; height: 525px; }
+.index-h1 { font-size: 2em; color: #fff; font-weight: 100; text-align: center; }
+.profile-h1 { font-size: 2em; color: #fff; font-weight: 100; margin-left: 2.5em; }
+.profile-done { margin-left: 5em; margin-top: 6.1em; }
+.profile-edit { margin-left: 5em; }
 
 .right { margin-right: 7em; }
 .left { margin-left: 5em; }

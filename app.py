@@ -10,8 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
 from flask_socketio import SocketIO, Namespace, send, emit, disconnect
 from models import User, Chat
-from validate import LoginForm, RegistrationForm, ChangeFirstName, \
-    ChangeLastName
+from validate import LoginForm, RegistrationForm, ProfileForm
 from chat import MyNamespace
 from utils import db
 
@@ -133,43 +132,20 @@ def register():
 @app.route('/profile/<username>', methods=['GET', 'POST'])
 @login_required
 def profile(username):
-    form1 = ChangeFirstName(request.form)
-    form2 = ChangeLastName(request.form)
+    form = ProfileForm(request.form)
+    session['editing'] = False
     print('Printing session[\'username\']: %s' % session['username'])
 
     if username != session['username']:
         return redirect(url_for('index'))
 
     if request.method == 'POST':
-        form_name = request.form
-        if 'change_first_name' in form_name:
-            status = 'first'
-            load_profile = User.query.filter_by(username=session['username']
-                                                ).first()
-            user = load_profile.username
-            email = load_profile.email
-            first_name = load_profile.first_name
-            last_name = load_profile.last_name
-            change_first_name = request.form['change_first_name']
-            print(change_first_name)
-            User.update(status, first_name, change_first_name)
-            return render_template('profile.html', form1=form1, form2=form2,
-                                   username=username, user=user, email=email,
-                                   first_name=first_name, last_name=last_name)
-        elif 'change_last_name' in form_name:
-            status = 'last'
-            load_profile = User.query.filter_by(username=session['username']
-                                                ).first()
-            user = load_profile.username
-            email = load_profile.email
-            first_name = load_profile.first_name
-            last_name = load_profile.last_name
-            change_last_name = request.form['change_last_name']
-            print(change_last_name)
-            User.update(status, last_name, change_last_name)
-            return render_template('profile.html', form1=form1, form2=form2,
-                                   username=username, user=user, email=email,
-                                   first_name=first_name, last_name=last_name)
+        if 'edit' in request.form:
+            print('Editing!')
+            session['editing'] = True
+        elif 'done' in request.form and form.validate():
+            print('Done!')
+            session['editing'] = False
 
     load_profile = User.query.filter_by(username=session['username']
                                         ).first()
@@ -178,9 +154,9 @@ def profile(username):
     first_name = load_profile.first_name
     last_name = load_profile.last_name
 
-    return render_template('profile.html', form1=form1, form2=form2,
-                           username=username, user=user, email=email,
-                           first_name=first_name, last_name=last_name)
+    return render_template('profile_redo.html', username=username, user=user,
+                           email=email, form=form, first_name=first_name,
+                           last_name=last_name)
 
 
 # logout route for button
