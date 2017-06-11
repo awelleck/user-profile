@@ -145,6 +145,11 @@ def profile(username):
             session['editing'] = True
         elif 'done' in request.form and form.validate():
             print('Done!')
+            username = session['username']
+            email = request.form['email']
+            first_name = request.form['first_name']
+            last_name = request.form['last_name']
+            User.update(username, email, first_name, last_name)
             session['editing'] = False
 
     load_profile = User.query.filter_by(username=session['username']
@@ -154,7 +159,7 @@ def profile(username):
     first_name = load_profile.first_name
     last_name = load_profile.last_name
 
-    return render_template('profile_redo.html', username=username, user=user,
+    return render_template('profile.html', username=username, user=user,
                            email=email, form=form, first_name=first_name,
                            last_name=last_name)
 
