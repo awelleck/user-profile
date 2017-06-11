@@ -58,11 +58,10 @@ class TestUser(TestCase):
 
     def test_update(self):
         new_first_name = 'seven'
-        status = 'first'
         user = User(username, password, email, first_name, last_name)
 
         User.insert(user)
-        User.update(status, first_name, new_first_name)
+        User.update(username, email, new_first_name, last_name)
 
         actual = User.query.filter_by(username=username).first()
 
