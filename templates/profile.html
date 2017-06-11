@@ -4,27 +4,33 @@
           {% if session['editing'] == False %}
           <form class="profile-done" method="POST">
             <div>
-              <div class="mdl-textfield mdl-js-textfield">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <label class="mdl-textfield__label">username</label>
                 <input class="mdl-textfield__input" type="text" name="username" value="{{ user }}" readonly>
               </div>
             </div>
             <div>
-              <div class="mdl-textfield mdl-js-textfield">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <label class="mdl-textfield__label">email</label>
                 <input class="mdl-textfield__input" type="text" name="email" value="{{ email }}" readonly>
               </div>
             </div>
             <div>
-              <div class="mdl-textfield mdl-js-textfield">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <label class="mdl-textfield__label">first name</label>
                 <input class="mdl-textfield__input" type="text" name="first name" value="{{ first_name }}" readonly>
               </div>
             </div>
             <div>
-              <div class="mdl-textfield mdl-js-textfield">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <label class="mdl-textfield__label">last name</label>
                 <input class="mdl-textfield__input" type="text" name="last name" value="{{ last_name }}" readonly>
+              </div>
+            </div>
+            <div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <label class="mdl-textfield__label">time zone</label>
+                <input class="mdl-textfield__input" type="text" name="time zone" value="{{ session['time_zone'] }}" readonly>
               </div>
             </div>
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" name="edit">
@@ -34,24 +40,38 @@
           {% endif %}
           {% if session['editing'] == True %}
           <h1 class="profile-h1">Editing profile fields...</h1>
+          {% if session['warn'] %}
+          <p class="warn">{{ session['warn'] }}</p>
+          {% endif %}
           <form class="profile-edit" method="POST">
             <input type="hidden" name="username" value="{{ user }}">
             <div>
-              <div class="mdl-textfield mdl-js-textfield">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <label class="mdl-textfield__label">email</label>
                 {{ form.email(class="mdl-textfield__input", type="text", value=email) }}
               </div>
             </div>
             <div>
-              <div class="mdl-textfield mdl-js-textfield">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <label class="mdl-textfield__label">first name</label>
                 {{ form.first_name(class="mdl-textfield__input", type="text", value=first_name) }}
               </div>
             </div>
             <div>
-              <div class="mdl-textfield mdl-js-textfield">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <label class="mdl-textfield__label">last name</label>
                 {{ form.last_name(class="mdl-textfield__input", type="text", value=last_name) }}
+              </div>
+            </div>
+            <div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <select class="mdl-textfield__input" id="time_zone" name="time_zone">
+                  <option value="UTC">Coordinated Universal Time (UTC)</option>
+                  <option value="Atlantic">Atlantic +4</option>
+                  <option value="Eastern">Eastern +5</option>
+                  <option value="Central">Central +6</option>
+                </select>
+                <label class="mdl-textfield__label" for="time_zone">time zone</label>
               </div>
             </div>
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" name="done">

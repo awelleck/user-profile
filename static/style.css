@@ -20,6 +20,7 @@ body { background-color: #303030; } /*slate grey*/
 .profile-h1 { font-size: 2em; color: #fff; font-weight: 100; margin-left: 2.5em; }
 .profile-done { margin-left: 5em; margin-top: 6.1em; }
 .profile-edit { margin-left: 5em; }
+.warn { margin-left: 5em; color: red; }
 
 .right { margin-right: 7em; }
 .left { margin-left: 5em; }

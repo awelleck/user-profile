@@ -144,13 +144,28 @@ def profile(username):
             print('Editing!')
             session['editing'] = True
         elif 'done' in request.form and form.validate():
-            print('Done!')
-            username = session['username']
-            email = request.form['email']
-            first_name = request.form['first_name']
-            last_name = request.form['last_name']
-            User.update(username, email, first_name, last_name)
-            session['editing'] = False
+            try:
+                print('Done!')
+                session.pop('warn', None)
+                username = session['username']
+                email = request.form['email']
+                first_name = request.form['first_name']
+                last_name = request.form['last_name']
+                time_zone = request.form['time_zone']
+                session['time_zone'] = time_zone
+                User.update(username, email, first_name, last_name)
+                session['editing'] = False
+            except exc.SQLAlchemyError as e:
+                str_e = str(e)
+                email_exept = 'entries_email_key'
+                session['editing'] = True
+                if email_exept in str_e:
+                    warn = 'Email address \'' + email + '\' is already taken!'
+                    session['warn'] = warn
+                    User.rollback()
+                else:
+                    warn = 'Database error!'
+                    session['warn'] = warn
 
     load_profile = User.query.filter_by(username=session['username']
                                         ).first()
@@ -200,6 +215,7 @@ def login():
                     status.HTTP_406_NOT_ACCEPTABLE)
         elif login is True:
             session['username'] = request.form['username']
+            session['time_zone'] = 'UTC'
             return redirect(url_for('profile', username=username))
 
     return render_template('login.html', form=form)
