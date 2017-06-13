@@ -21,6 +21,7 @@ body { background-color: #303030; } /*slate grey*/
 .profile-done { margin-left: 5em; margin-top: 6.1em; }
 .profile-edit { margin-left: 5em; }
 .warn { margin-left: 5em; color: red; }
+.http404 { margin-left: 1em; margin-top: 1em; color: white; }
 
 .right { margin-right: 7em; }
 .left { margin-left: 5em; }
