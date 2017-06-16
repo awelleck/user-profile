@@ -1,6 +1,7 @@
 import hashlib
 import uuid
 import os
+import datetime
 
 from flask import Flask, render_template, request, session, redirect, \
     url_for, flash
@@ -244,12 +245,22 @@ def test():
 def chat():
     if request.method == 'GET':
         current_user = session['username']
+        offset = session['time_zone']
+        if offset == 'UTC':
+            offset = 0
+        elif offset == 'Atlantic':
+            offset = 4
+        elif offset == 'Eastern':
+            offset = 5
+        elif offset == 'Central':
+            offset = 6
         history_list = []
         history = Chat.query.all()
         for entries in history:
+            timestamp = (entries.msg_timestamp +
+                         datetime.timedelta(hours=offset))
             history_list.append((entries.username, entries.messages,
-                                entries.msg_timestamp.
-                                strftime('%m/%d/%y %H:%M')))
+                                timestamp.strftime('%m/%d/%y %H:%M')))
         return render_template('chat.html', history=history_list,
                                current_user=current_user)
 
