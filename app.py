@@ -248,21 +248,23 @@ def chat():
         offset = session['time_zone']
         if offset == 'UTC':
             offset = 0
-        elif offset == 'Atlantic':
-            offset = 4
         elif offset == 'Eastern':
-            offset = 5
+            offset = 4
         elif offset == 'Central':
+            offset = 5
+        elif offset == 'Mountain':
             offset = 6
+        elif offset == 'Pacific':
+            offset = 7
         history_list = []
         history = Chat.query.all()
         for entries in history:
-            timestamp = (entries.msg_timestamp +
+            timestamp = (entries.msg_timestamp -
                          datetime.timedelta(hours=offset))
             history_list.append((entries.username, entries.messages,
                                 timestamp.strftime('%m/%d/%y %H:%M')))
         return render_template('chat.html', history=history_list,
-                               current_user=current_user)
+                               current_user=current_user, offset=offset)
 
 
 if __name__ == '__main__':

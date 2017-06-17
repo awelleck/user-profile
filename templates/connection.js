@@ -12,25 +12,31 @@ $(document).ready(function() {
 
   socket.on('my_response', function(msg) {
     var current_user = '{{ current_user }}';
+    var offset = '{{ offset }}';
     var d = new Date();
-    var month = d.getMonth();
+    var month = d.getUTCMonth();
     month = (month + 1) + '';
     if (month.length == 1) {
       month = '0' + month;
     }
-    var day = d.getDate();
+    var day = d.getUTCDate();
     day = day + '';
     if (day.length == 1) {
       day = '0' + day;
     }
-    var year = d.getFullYear();
+    var year = d.getUTCFullYear();
     year = year.toString().substr(2,2);
-    var hours = d.getHours();
+    var hours = d.getUTCHours();
+    if (hours - offset > 0) {
+      hours = hours - offset
+    } else {
+      hours = ((24 + hours) - offset)
+    }
     hours = hours + '';
     if (hours.length == 1) {
       hours = '0' + hours;
     }
-    var minutes = d.getMinutes();
+    var minutes = d.getUTCMinutes();
     minutes = minutes + '';
     if (minutes.length == 1) {
       minutes = '0' + minutes;
@@ -60,9 +66,4 @@ $(document).ready(function() {
 
   scrollToBottom();
   getMessages();
-
-  var offset = new Date().getTimezoneOffset();
-  console.log('Offset in minutes: ' + offset);
-  var hours_offset = (offset / 60);
-  console.log('Offset in hours: ' + hours_offset);
 });
