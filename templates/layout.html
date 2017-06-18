@@ -30,6 +30,7 @@
             <a class="mdl-navigation__link" href="{{ url_for('index') }}">Home</a>
             {% if session['username'] %}
             <a class="mdl-navigation__link" href="{{ url_for('profile', username=session['username']) }}">Profile</a>
+            <a class="mdl-navigation__link" href="{{ url_for('logout') }}">Logout</a>
             {% endif %}
             <a class="mdl-navigation__link right" href="{{ url_for('chat') }}">Chat</a>
           </nav>

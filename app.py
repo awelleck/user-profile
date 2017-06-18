@@ -81,6 +81,7 @@ def index():
                     status.HTTP_406_NOT_ACCEPTABLE)
         elif login is True:
             session['username'] = request.form['username']
+            session['time_zone'] = 'UTC'
             print('%s: you are logged in!' % login)
             print('Session active!')
             print(session)
@@ -189,15 +190,11 @@ def profile(username):
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     if request.method == 'POST':
-        session.pop('username', None)
-        session.pop('editing', None)
-        session.pop('time_zone', None)
+        session.clear()
         print('Logged out!')
         return redirect(url_for('index'))
 
-    session.pop('username', None)
-    session.pop('editing', None)
-    session.pop('time_zone', None)
+    session.clear()
     print('Logged out!')
     return redirect(url_for('index'))
 

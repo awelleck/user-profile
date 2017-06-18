@@ -1,4 +1,4 @@
-from wtforms import Form, StringField, PasswordField, validators
+from wtforms import Form, StringField, PasswordField, SelectField, validators
 
 
 class LoginForm(Form):
@@ -41,3 +41,9 @@ class ProfileForm(Form):
     last_name = StringField('Last Name', [validators.Length(min=2, max=35,
                             message='Last name must be between 2 and 35 ' +
                             'characters long!')])
+    time_zone = SelectField('Time Zone', choices=[
+                            ('UTC', 'Coordinated Universal Time (UTC)'),
+                            ('Eastern', 'Eastern -4'),
+                            ('Central', 'Central -5'),
+                            ('Mountain', 'Mountain -6'),
+                            ('Pacific', 'Pacific -7')])
