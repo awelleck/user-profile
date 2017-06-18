@@ -28,6 +28,9 @@
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
             <a class="mdl-navigation__link" href="{{ url_for('index') }}">Home</a>
+            {% if session['username'] %}
+            <a class="mdl-navigation__link" href="{{ url_for('profile', username=session['username']) }}">Profile</a>
+            {% endif %}
             <a class="mdl-navigation__link right" href="{{ url_for('chat') }}">Chat</a>
           </nav>
         </div>

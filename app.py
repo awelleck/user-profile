@@ -190,10 +190,14 @@ def profile(username):
 def logout():
     if request.method == 'POST':
         session.pop('username', None)
+        session.pop('editing', None)
+        session.pop('time_zone', None)
         print('Logged out!')
         return redirect(url_for('index'))
 
     session.pop('username', None)
+    session.pop('editing', None)
+    session.pop('time_zone', None)
     print('Logged out!')
     return redirect(url_for('index'))
 
