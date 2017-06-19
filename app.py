@@ -150,6 +150,8 @@ def profile(username):
         if 'edit' in request.form:
             print('Editing!')
             session['editing'] = True
+            form.time_zone.default = session['time_zone']
+            form.process()
         elif 'done' in request.form and form.validate():
             try:
                 print('Done!')
@@ -173,6 +175,12 @@ def profile(username):
                 else:
                     warn = 'Database error!'
                     session['warn'] = warn
+        else:
+            # In the case the form does not validate
+            session['editing'] = True
+            form.time_zone.default = session['time_zone']
+            form.process()
+
 
     load_profile = User.query.filter_by(username=session['username']
                                         ).first()

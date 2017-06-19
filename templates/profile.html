@@ -33,7 +33,7 @@
                 <input class="mdl-textfield__input" type="text" name="time zone" value="{{ session['time_zone'] }}" readonly>
               </div>
             </div>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" name="edit">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" type="submit" name="edit">
               edit
             </button>
           </form>
@@ -42,6 +42,23 @@
           <h1 class="profile-h1">Editing profile fields...</h1>
           {% if session['warn'] %}
           <p class="warn">{{ session['warn'] }}</p>
+          {% endif %}
+          {% if form.errors %}
+          {% if form.email.errors %}
+          {% for error in form.email.errors %}
+          <p class="warn">{{ error }}</p>
+          {% endfor %}
+          {% endif %}
+          {% if form.first_name.errors %}
+          {% for error in form.first_name.errors %}
+          <p class="warn">{{ error }}</p>
+          {% endfor %}
+          {% endif %}
+          {% if form.last_name.errors %}
+          {% for error in form.last_name.errors %}
+          <p class="warn">{{ error }}</p>
+          {% endfor %}
+          {% endif %}
           {% endif %}
           <form class="profile-edit" method="POST">
             <input type="hidden" name="username" value="{{ user }}">
@@ -66,10 +83,10 @@
             <div>
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <label class="mdl-textfield__label" for="time_zone">time zone</label>
-                {{ form.time_zone(class="mdl-textfield__input", default=session['time_zone']) }}
+                {{ form.time_zone(class="mdl-textfield__input") }}
               </div>
             </div>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" name="done">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" type="submit" name="done">
               done
             </button>
           </form>

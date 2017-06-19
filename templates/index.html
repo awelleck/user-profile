@@ -10,19 +10,22 @@
           <h1 class="index-h1">User profile with authentication and chat.</h1>
           <form method="POST" action="/">
             <div class="mdl-grid mdl-center picture">
+              <div class="mdl-cell mdl-cell--4-col"></div>
               <div class="mdl-cell mdl-cell--4-col">
                 {% if form.errors %}
-                <div class="errors">
-                  {% for field in form.errors %}
-                  {% for error in form.errors[field] %}
-                  <p>{{ error }}</p>
+                <div>
+                  {% if form.username.errors %}
+                  {% for error in form.username.errors %}
+                  <p style="color: red;">{{ error }}</p>
                   {% endfor %}
+                  {% endif %}
+                  {% if form.password.errors %}
+                  {% for error in form.password.errors %}
+                  <p style="color: red;">{{ error }}</p>
                   {% endfor %}
+                  {% endif %}
                 </div>
                 {% endif %}
-                <p class=pad>{{ warn }}</p>
-              </div>
-              <div class="mdl-cell mdl-cell--4-col">
                 <div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     {{ form.username(class="mdl-textfield__input") }}
