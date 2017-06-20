@@ -39,7 +39,7 @@ or
 
 ## Example config.cfg file:
 
-```
+```bash
 export USER=postgres_user
 export PASS=postgres_password
 export KEY=flask_secret_key
@@ -59,7 +59,9 @@ then `source config.cfg`
 
 Granting permissions for DB for both tables
 
-* `GRANT ALL PRIVILEGES ON TABLE entries TO db_user;`
-* `GRANT USAGE ON SEQUENCE entries_id_seq TO db_user;`
-* `GRANT ALL PRIVILEGES ON TABLE chat TO db_user;`
-* `GRANT USAGE ON SEQUENCE chat_id_seq TO db_user;`
+```sql
+GRANT ALL PRIVILEGES ON TABLE entries TO db_user;
+GRANT USAGE ON SEQUENCE entries_id_seq TO db_user;
+GRANT ALL PRIVILEGES ON TABLE chat TO db_user;
+GRANT USAGE ON SEQUENCE chat_id_seq TO db_user;
+```
