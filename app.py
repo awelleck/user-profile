@@ -181,7 +181,6 @@ def profile(username):
             form.time_zone.default = session['time_zone']
             form.process()
 
-
     load_profile = User.query.filter_by(username=session['username']
                                         ).first()
     user = load_profile.username
