@@ -7,4 +7,5 @@ eventlet
 SQLAlchemy
 psycopg2
 WTForms
-pep8
+pycodestyle
+pylint
